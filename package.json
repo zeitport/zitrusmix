@@ -1,0 +1,20 @@
+{
+    "name": "zitrusmix",
+    "version": "0.20.0",
+    "description": "",
+    "main": "index.js",
+    "type": "module",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/zeitport/zitrusmix.git"
+    },
+    "author": "Christian Schuller <cschuller@servusalps.com>",
+    "license": "Apache-2.0",
+    "bugs": {
+        "url": "https://github.com/zeitport/zitrusmix/issues"
+    },
+    "homepage": "https://github.com/zeitport/zitrusmix#readme"
+}
