@@ -1,0 +1,5 @@
+# Installation integration
+
+```
+npm install
+```

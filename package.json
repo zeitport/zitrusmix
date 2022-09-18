@@ -14,7 +14,7 @@
         "type": "git",
         "url": "git+https://github.com/zeitport/zitrusmix.git"
     },
-    "author": "Christian Schuller <cschuller@servusalps.com>",
+    "author": "Christian Schuller <chris@zeitport.com>",
     "license": "Apache-2.0",
     "bugs": {
         "url": "https://github.com/zeitport/zitrusmix/issues"
