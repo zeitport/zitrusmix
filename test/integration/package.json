@@ -1,0 +1,14 @@
+{
+    "name": "@zeitport/integration-test",
+    "version": "0.0.0",
+    "description": "",
+    "main": "index.js",
+    "type": "module",
+    "scripts": {
+        "start:app": "npm run index.js"
+    },
+    "license": "BSD-3-Clause",
+    "dependencies": {
+        "zitrusmix": "file:../.."
+    }
+}

@@ -1,0 +1,67 @@
+{
+    "name": "zitrusmix",
+    "version": "0.52.0",
+    "description": "",
+    "type": "module",
+    "main": "./dist/index.js",
+    "types": "./dist/index.d.ts",
+    "exports": "./dist/index.js",
+    "files": [
+        "dist",
+        "README.md",
+        "LICENSE"
+    ],
+    "scripts": {
+        "build": "tsc --build",
+        "build:types": "tsc -p ./src/tsconfig.type.json",
+        "compile:watch": "tsc --watch --project ./src/tsconfig.json",
+        "test": "vitest --dir ./test/unit",
+        "test:watch": "vitest watch --dir ./test/unit",
+        "test:app": "node ./test/integration/index.js",
+        "lint": "eslint ./src/**/*.ts ./test/**/*.ts",
+        "fix": "eslint ./src/**/*.ts ./test/**/*.ts --fix --cache",
+        "tool:createErrorId": "node ./tools/createErrorId.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/zeitport/zitrusmix.git"
+    },
+    "author": "Christian Schuller <chris@zeitport.com>",
+    "license": "BSD-3-Clause",
+    "bugs": {
+        "url": "https://github.com/zeitport/zitrusmix/issues"
+    },
+    "homepage": "https://github.com/zeitport/zitrusmix#readme",
+    "dependencies": {
+        "@fastify/static": "^6.5.0",
+        "autoprefixer": "^10.4.13",
+        "chalk": "^5.1.2",
+        "fastify": "^4.7.0",
+        "globby": "^13.1.2",
+        "nanoid": "^4.0.0",
+        "parse5": "^7.1.1",
+        "postcss": "^8.4.18",
+        "postcss-modules": "^6.0.0",
+        "postcss-nested": "^6.0.0"
+    },
+    "engines": {
+        "node": ">=16.0.0"
+    },
+    "devDependencies": {
+        "@types/mocha": "^10.0.0",
+        "@types/node": "^18.11.9",
+        "@typescript-eslint/eslint-plugin": "^5.42.1",
+        "chai": "^4.3.7",
+        "eslint": "^8.27.0",
+        "eslint-plugin-jsdoc": "^39.6.2",
+        "eslint-plugin-json-es": "^1.5.7",
+        "eslint-plugin-node": "^11.1.0",
+        "jest": "^29.3.1",
+        "mocha": "^10.1.0",
+        "nodemon": "^2.0.20",
+        "ts-node": "^10.9.1",
+        "typescript": "latest",
+        "vitest": "^0.25.1",
+        "zitrusmix": "file:."
+    }
+}
