@@ -1,0 +1,29 @@
+{
+    "compilerOptions": {
+        "module": "esnext",
+        "lib": [
+            "es2017",
+            "dom",
+            "dom.iterable"
+        ],
+        "allowJs": true,
+        "declaration": false,
+        "emitDeclarationOnly": false,
+        "noEmit": true,
+        "strict": true,
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
+        "noImplicitReturns": true,
+        "noFallthroughCasesInSwitch": true,
+        "moduleResolution": "node",
+        "isolatedModules": true,
+        "esModuleInterop": true,
+        "allowSyntheticDefaultImports": true,
+        "experimentalDecorators": true,
+        "forceConsistentCasingInFileNames": true,
+        "useDefineForClassFields": false
+    },
+    "include": [
+        "./src"
+    ]
+}
