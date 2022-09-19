@@ -1,15 +1,17 @@
 {
-    "name": "@zitrusmix/installation",
+    "name": "@zitrusmix/example",
     "version": "0.1.0",
     "description": "",
     "main": "index.js",
     "type": "module",
     "scripts": {
+        "start": "node index.js",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "author": "Christian Schuller <chris@zeitport.com>",
     "license": "Apache-2.0",
     "dependencies": {
-        "zitrusmix": "latest"
+        "fastify": "^4.6.0",
+        "zitrusmix": "file:../../../"
     }
 }
