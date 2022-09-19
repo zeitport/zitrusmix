@@ -54,7 +54,7 @@ describe('html()', function () {
     });
 
     describe('custom element + slots', function () {
-        it('renders custom element with a slot', function () {
+        it('renders a slot', function () {
             // Given
             element('my-element', ({ html }) => html`<h1>Hello!</h1><p><slot></slot></p>`);
 
@@ -65,7 +65,7 @@ describe('html()', function () {
             expect(result.text).to.equal('<my-element><h1>Hello!</h1><p>Some text</p></my-element>');
         });
 
-        it('renders multiple custom elements with a slot', function () {
+        it('renders multiple slots', function () {
             // Given
             element('my-header', ({ html }) => html`<h1><slot></slot></h1>`);
             element('my-body', ({ html }) => html`<section><slot></slot></section>`);
@@ -77,7 +77,7 @@ describe('html()', function () {
             expect(result.text).to.equal('<my-header><h1>Title</h1></my-header><my-body><section>Content</section></my-body>');
         });
 
-        it('renders multiple nested custom elements with a slot', function () {
+        it('renders multiple nested slots', function () {
             // Given
             element('my-page', ({ html }) => html`<my-header><slot></slot></my-header>`);
             element('my-header', ({ html }) => html`<h1><slot></slot></h1>`);
@@ -89,7 +89,8 @@ describe('html()', function () {
             expect(result.text).to.equal('<my-page><my-header><h1>Title</h1></my-header></my-page>');
         });
 
-        it('renders custom element with named slots', function () {
+
+        it('renders a named slot', function () {
             // Given
             element('my-page', ({ html }) => html`<header><slot name="title"></slot></header>`);
 
@@ -98,6 +99,17 @@ describe('html()', function () {
 
             // Then
             expect(result.text).to.equal('<my-page><header><h1>Hello</h1></header></my-page>');
+        });
+
+        it('renders a named slot and a slot', function () {
+            // Given
+            element('my-page', ({ html }) => html`<header><slot name="title"></slot></header><slot></slot>`);
+
+            // When
+            const result = html`<my-page><h1 slot="title">Fruits</h1><p>Lemon</p><p>Apple</p></my-page>`;
+
+            // Then
+            expect(result.text).to.equal('<my-page><header><h1>Fruits</h1></header><p>Lemon</p><p>Apple</p></my-page>');
         });
     });
 });

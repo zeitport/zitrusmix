@@ -20,11 +20,9 @@ export async function zitrusmix(options) {
 };
 
 export function route(route, callback) {
-    console.log(`Add route: ${route} - ${callback.name}`);
     routes.set(route, callback);
 };
 
 export function element(elementName, callback) {
-    console.log(`Add element: ${elementName} - ${callback.name}`);
     elements.set(elementName, callback);
 };

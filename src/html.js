@@ -10,6 +10,9 @@ import { nodeTree } from './utils/nodeTree.js';
  * @typedef {import('parse5/dist/common/token').Attribute} Attribute
  */
 
+/**
+ * @returns {TemplateResult}
+ */
 export function html(strings, ...values) {
     const raw = String.raw({ raw: strings }, ...values);
 
@@ -21,7 +24,6 @@ export function html(strings, ...values) {
         const renderCustomElement = elements.get(host.nodeName);
 
         if (renderCustomElement) {
-            console.log('Render', host.nodeName);
             const attributes = Object.fromEntries(host.attrs.map(({ name, value }) => [name, value]));
             const elementResult = renderCustomElement({ html, attrs: attributes, attributes });
             const elementFragment = elementResult.fragment;
@@ -30,7 +32,7 @@ export function html(strings, ...values) {
             const slotMap = createSlotMap(slots);
             const slottedChildElements = nodeTree.filter(host, node => hasAttribute(node, 'slot'));
 
-            // Move slotted elements to slots
+            // Move slotted childs to slots
             for (const element of slottedChildElements) {
                 const slotName = getAttribute(element, 'slot');
 
@@ -48,7 +50,7 @@ export function html(strings, ...values) {
                 }
             }
 
-            // Move other elements to unnamed slot
+            // Move other childs to unnamed slot
             const defaultSlot = slotMap.get(null);
             if (defaultSlot) {
                 for(const element of host.childNodes) {
@@ -59,21 +61,8 @@ export function html(strings, ...values) {
             // Remove all slots
             slots.forEach(defaultTreeAdapter.detachNode);
 
-            elementResult.text = serialize(elementFragment);
-
-            // if (slots.length > 0) {
-
-            //     for (const child of host.childNodes) {
-            //         defaultTreeAdapter.insertBefore(slots[0].parentNode, child, slots[0]);
-            //     }
-
-            //     // console.log('Remove slot: ', slots[0].attrs[0].value);
-            //     defaultTreeAdapter.detachNode(slots[0]);
-
-            //     elementResult.text = serialize(elementFragment);
-            // }
-
             host.childNodes = elementFragment.childNodes;
+            elementResult.text = serialize(elementFragment);
         }
     }
 
