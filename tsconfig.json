@@ -6,7 +6,11 @@
             "dom",
             "dom.iterable"
         ],
+        "target": "ES2022",
+        "types": [],
         "allowJs": true,
+        "noImplicitAny": false,
+        "checkJs": true,
         "declaration": false,
         "emitDeclarationOnly": false,
         "noEmit": true,
@@ -21,9 +25,16 @@
         "allowSyntheticDefaultImports": true,
         "experimentalDecorators": true,
         "forceConsistentCasingInFileNames": true,
-        "useDefineForClassFields": false
+        "useDefineForClassFields": false,
+        "skipLibCheck": true
     },
     "include": [
-        "./src"
+        "./src/**/*.js",
+        "./src/**/*.ts"
+    ],
+    "exclude": [
+        "node_modules",
+        "./node_modules",
+        "./node_modules/*",
     ]
 }

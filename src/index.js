@@ -1,13 +1,18 @@
 import path from 'node:path';
-import {globby} from 'globby';
+import { globby } from 'globby';
 
-import {router} from './router.js';
-import {routes} from './routes.js';
-import {elements} from './elements.js';
+import { router } from './router.js';
+import { routes } from './routes.js';
+import { elements } from './elements.js';
+import { Options } from './options.js';
 
+/**
+ * @param {Options} [options]
+ * @returns
+ */
 export async function zitrusmix(options) {
-
-    const modules = await globby(['app/**/*.js', 'app/**/*.mjs']);
+    const init = new Options(options);
+    const modules = await globby(init.app);
 
     for (const modulepath of modules) {
         const absolutePath = path.join(process.cwd(), modulepath);

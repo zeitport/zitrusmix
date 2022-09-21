@@ -1,26 +1,28 @@
 import {routes} from './routes.js';
-import {elements} from './elements.js';
-import enhance from '@enhance/ssr'
+import {html} from './html.js';
 
 /**
  * Encapsulates the routes
- * @param {FastifyInstance} fastify  Encapsulated Fastify Instance
- * @param {Object} options plugin options, refer to https://www.fastify.io/docs/latest/Reference/Plugins/#plugin-options
+ * @param {any} fastify  Encapsulated Fastify Instance
  */
-export async function router(fastify, options) {
-    const html = enhance({
-        elements: Object.fromEntries(elements)
-    });
-
+export async function router(fastify) {
     for (const route of routes.keys()) {
-        fastify.get(route, async (request, reply) => {
+        fastify.get(route, async (_, reply) => {
             const callback = routes.get(route);
-            try {
-                const document = await callback({html});
-                reply.type('text/html').send(document);
-            } catch (error) {
-                console.error(error);
-                reply.type('text/html').send(error.message);
+
+            if (callback) {
+                try {
+                    const document = await callback({html});
+                    reply.type('text/html').send(document);
+                } catch (error) {
+                    console.error(error);
+
+                    // @ts-ignore
+                    const message = error?.message || 'Route callback failed.';
+                    reply.type('text/html').send(message);
+                }
+            } else {
+                reply.status(404).send('Nothing found');
             }
         });
     }

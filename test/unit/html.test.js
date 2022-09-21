@@ -1,4 +1,3 @@
-
 import { expect } from './sandbox.js';
 import { html } from '../../src/html.js';
 import { element } from '../../src/index.js';
@@ -27,6 +26,17 @@ describe('html()', function () {
 
             // Then
             expect(result.text).to.equal('<my-element><h1>Hello World!</h1></my-element>');
+        });
+
+        it('renders element inside <p>', function () {
+            // Given
+            element('my-element', ({ html }) => html`<ul>Hello World!</ul>`);
+
+            // When
+            const result = html`<p><my-element></my-element></p>`;
+
+            // Then
+            expect(result.text).to.equal('<p><my-element><ul>Hello World!</ul></my-element></p>');
         });
 
         it('renders element with attributes', function () {
