@@ -1,5 +1,5 @@
 /**
- * @typedef {import('./types/zitrusmix.js').elementCallback} elementCallback
+ * @typedef {import('../types/zitrusmix.js').renderFn} elementCallback
  */
 
 /**

@@ -1,22 +1,21 @@
-import path from 'node:path';
-import { globby } from 'globby';
-
-import { router } from './router.js';
-import { routes } from './routes.js';
-import { elements } from './elements.js';
+import { router } from './router/router.js';
+import { elements } from './state/elements.js';
 import { Options } from './options.js';
+import { scanPages } from './startup/scanPages.js';
+import { definePageRoute } from './router/router.js';
 
 /**
- * @param {Options} [options]
+ * @param {Options} [init]
  * @returns
  */
-export async function zitrusmix(options) {
-    const init = new Options(options);
-    const modules = await globby(init.app);
+export async function zitrusmix(init) {
+    const options = new Options(init);
 
-    for (const modulepath of modules) {
-        const absolutePath = path.join(process.cwd(), modulepath);
-        await import(`file://${absolutePath}`);
+    const pages = await scanPages(options);
+    console.log(pages);
+
+    for(const page of pages) {
+        definePageRoute(page);
     }
 
     return {
@@ -24,10 +23,9 @@ export async function zitrusmix(options) {
     }
 };
 
-export function route(route, callback) {
-    routes.set(route, callback);
-};
-
-export function element(elementName, callback) {
-    elements.set(elementName, callback);
+/**
+ * @param {import('./types/zitrusmix').ElementDefinition} definition
+ */
+export function defineElement(definition) {
+    elements.set(definition.tag, definition.render);
 };

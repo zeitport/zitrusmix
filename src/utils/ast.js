@@ -51,6 +51,22 @@ export function hasAttribute(node, attributeName) {
     return Boolean(attribute);
 }
 
+/**
+ * @param {Node} node
+ * @returns {Map<string, string>}
+ */
+export function getAttributeMap(node) {
+    const attributes = new Map();
+
+    if (node.attrs) {
+        for (const attribute of node.attrs) {
+            attributes.set(attribute.name, attribute.value);
+        }
+    }
+
+    return attributes;
+}
+
 
 /**
  * @param {Node} node
@@ -100,6 +116,7 @@ export function isElement(node) {
 
 export const ast = {
     getAttribute,
+    getAttributeMap,
     hasAttribute,
     setAttribute,
     isCustomElement,

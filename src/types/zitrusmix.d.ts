@@ -18,5 +18,23 @@ export interface RouteContext {
     html: html
 }
 
-export type elementCallback = function(ElementContext): TemplateResult;
+export interface StyleContext {
+    css: css
+}
+
+export type renderFn = function(ElementContext): TemplateResult;
+export type styleFn = function(StyleContext): StyleResult;
+
 export type routeCallback = function(RouteContext): TemplateResult;
+
+export type ElementDefinition = {
+    /**
+     * The name of the custom element tag without <>.
+     * The name shall contain at least one "-".
+     *
+     * For example: my-name-card
+     */
+    tag: string,
+    render: renderFn,
+    style?: styleFn
+};

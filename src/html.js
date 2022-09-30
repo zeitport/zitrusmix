@@ -1,6 +1,6 @@
 import { parseFragment, serialize, defaultTreeAdapter } from 'parse5';
 
-import { elements } from './elements.js';
+import { elements } from './state/elements.js';
 import { TemplateResult } from './templateResult.js';
 import { ast } from './utils/ast.js';
 
