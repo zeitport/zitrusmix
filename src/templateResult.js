@@ -2,11 +2,12 @@ import { defaultTreeAdapter } from 'parse5';
 
 /**
  * @typedef {import('./types/ast').DocumentFragment} DocumentFragment
+ * @typedef {import('./types/ast').Document} Document
  */
 
 export class TemplateResult {
     /**
-     * @param {Partial<TemplateResult> | undefined | null} partial
+     * @param {Partial<TemplateResult>} [partial]
      */
     constructor(partial) {
         /**

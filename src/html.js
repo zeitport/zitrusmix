@@ -1,4 +1,4 @@
-import { parseFragment, serialize, defaultTreeAdapter } from 'parse5';
+import * as parse5 from 'parse5';
 
 import { elements } from './state/elements.js';
 import { TemplateResult } from './templateResult.js';
@@ -15,9 +15,9 @@ import { ast } from './utils/ast.js';
 export function html(strings, ...values) {
     const raw = String.raw({ raw: strings }, ...values);
 
-    const documentFragment = parseFragment(raw);
+    const fragment = parse5.parseFragment(raw);
 
-    const hosts = /** @type {ChildElement[]} */(ast.filter(documentFragment, ast.isCustomElement));
+    const hosts = /** @type {ChildElement[]} */(ast.filter(fragment, ast.isCustomElement));
 
     for (const host of hosts) {
         const renderCustomElement = elements.get(host.nodeName);
@@ -37,14 +37,14 @@ export function html(strings, ...values) {
                 const slotName = ast.getAttribute(element, 'slot');
 
                 if (slotName) {
-                    defaultTreeAdapter.detachNode(element);
+                    parse5.defaultTreeAdapter.detachNode(element);
                     ast.setAttribute(element, 'slot', null);
 
                     const slot = slotMap.get(slotName);
 
                     if (slot) {
                         if (slot.parentNode) {
-                            defaultTreeAdapter.insertBefore(slot.parentNode, element, slot);
+                            parse5.defaultTreeAdapter.insertBefore(slot.parentNode, element, slot);
                         }
                     } else {
                         throw new Error(`No slot with name "${slotName}" found.`);
@@ -57,22 +57,22 @@ export function html(strings, ...values) {
             if (defaultSlot) {
                 for (const element of host.childNodes) {
                     if (defaultSlot.parentNode) {
-                        defaultTreeAdapter.insertBefore(defaultSlot.parentNode, element, defaultSlot);
+                        parse5.defaultTreeAdapter.insertBefore(defaultSlot.parentNode, element, defaultSlot);
                     }
                 }
             }
 
             // Remove all slots
-            slots.forEach(node => defaultTreeAdapter.detachNode(node));
+            slots.forEach(node => parse5.defaultTreeAdapter.detachNode(node));
 
             host.childNodes = elementFragment.childNodes;
-            elementResult.text = serialize(elementFragment);
+            elementResult.text = parse5.serialize(elementFragment);
         }
     }
 
     return new TemplateResult({
-        fragment: documentFragment,
-        text: serialize(documentFragment)
+        fragment: fragment,
+        text: parse5.serialize(fragment)
     });
 }
 

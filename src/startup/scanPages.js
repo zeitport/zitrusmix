@@ -54,7 +54,8 @@ async function getRoute(file, baseDir, document) {
         const filebasedUrl = file
             .slice(0, -path.extname(file).length)
             .replace('/index', '/')
-            .replace(baseDir, '');
+            .replace(baseDir, '/')
+            .replaceAll('//', '/');
         pageRoute =new PageRoute({url: filebasedUrl, source: PageRouteSource.FILEPATH});
     }
 

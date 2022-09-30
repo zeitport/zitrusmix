@@ -1,4 +1,4 @@
-import { Decorators } from './decorators.js';
+import { TemplateResult } from '../templateResult.js';
 import { renderPages } from './plugins/renderPages.js';
 
 /**
@@ -12,12 +12,16 @@ import { renderPages } from './plugins/renderPages.js';
 const pages = new Set();
 
 /**
+ * @type {function(): TemplateResult}
+ */
+let pageHead = () => new TemplateResult();
+
+/**
  * Encapsulates the routes
  * @param {any} fastify  Encapsulated Fastify Instance
  */
 export async function router(fastify) {
-    fastify.decorateRequest(Decorators.PAGE, null);
-    fastify.register(renderPages, {pages})
+    fastify.register(renderPages, { pages, head: pageHead})
 }
 
 /**
@@ -25,4 +29,11 @@ export async function router(fastify) {
  */
 export function definePageRoute(page) {
     pages.add(page);
+}
+
+/**
+ * @param {function(): TemplateResult} head
+ */
+export function definePageHead(head) {
+    pageHead = head;
 }

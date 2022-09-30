@@ -1,32 +1,16 @@
-import {parseFragment, serialize, defaultTreeAdapter} from 'parse5';
+import * as parse5 from 'parse5';
 
 // https://astexplorer.net/#/1CHlCXc4n4
-const documentFragment = parseFragment(`
-    <div>
-        <my-element name="test">Content</my-element>
-    </div>
+const document = parse5.parse(`
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/static/styles.css">
+    <link rel="icon" href="/static/favicon.svg">
+</head>
 `);
 
-for (const node of traverseNodes(documentFragment)) {
-    if (defaultTreeAdapter.isElementNode(node) && node.nodeName.includes('-')) {
-        console.log(node);
+console.log(document.childNodes[0]);
 
-        node.attrs = [{name: 'name', value: 'test2'}];
-
-        console.log(node);
-    }
-}
-
-const updatedFragment = serialize(documentFragment);
+const updatedFragment = parse5.serialize(document.childNodes[0].childNodes[0]);
 console.log(updatedFragment);
-
-
-function* traverseNodes(node) {
-    for(const childNode of node.childNodes) {
-        yield childNode;
-
-        if (childNode.childNodes) {
-            yield* traverseNodes(childNode);
-        }
-    }
-}

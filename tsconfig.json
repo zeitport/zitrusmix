@@ -2,9 +2,9 @@
     "compilerOptions": {
         "module": "esnext",
         "lib": [
-            "es2017",
-            "dom",
-            "dom.iterable"
+            "ES6",
+            "ES2022",
+            "ES2021.String"
         ],
         "target": "ES2022",
         "types": [],

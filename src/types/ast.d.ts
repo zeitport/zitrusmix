@@ -1,4 +1,4 @@
-import type {DocumentFragment} from 'parse5/dist/tree-adapters/default';
+import type {DocumentFragment, Document} from 'parse5/dist/tree-adapters/default';
 import type {Element, ChildNode} from 'parse5/dist/tree-adapters/default';
 
 export interface Node {
@@ -14,6 +14,7 @@ export interface Attribute {
 }
 
 export type DocumentFragment = DocumentFragment;
+export type Document = Document;
 export type Element = Element;
 export type ChildNode = ChildNode;
 export type ChildElement = ChildNode & Element;

@@ -1,8 +1,15 @@
+import path from "node:path/posix";
+
 export class Options {
     /**
      * @param {Partial<Options> | undefined | null} [partial]
      */
     constructor(partial) {
+        /**
+         * @type {string}
+         */
+        this.cwd = partial?.cwd || process.cwd();
+
         /**
          * @type {string | readonly string[]}
          */
@@ -16,6 +23,16 @@ export class Options {
         /**
          * @type {string}
          */
-        this.pageRoot = partial?.pageRoot || './app/pages';
+        this.pageRoot = partial?.pageRoot || './app/pages/';
+
+        /**
+         * @type {string}
+         */
+        this.appRoot = partial?.appRoot || './app/';
+
+        /**
+         * @type {string}
+         */
+        this.head = partial?.head || './app/head.js';
     }
 }

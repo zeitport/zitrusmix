@@ -79,7 +79,7 @@ export function isCustomElement(node) {
 /**
  * @param {Node} node
  * @param {ElementCallbackFn} selector
- * @returns {Generator<Element, void>}
+ * @returns {Generator<Element, null>}
  */
 export function* traverse(node, selector = all) {
     if (node.childNodes) {
@@ -95,6 +95,8 @@ export function* traverse(node, selector = all) {
             }
         }
     }
+
+    return null;
 }
 
 /**
@@ -104,6 +106,15 @@ export function* traverse(node, selector = all) {
  */
 export function filter(node, selector = all) {
     return [...traverse(node, selector)];
+}
+
+/**
+ * @param {Node} node
+ * @param {ElementCallbackFn} selector
+ * @returns {Element | null}
+ */
+export function find(node, selector = all) {
+    return traverse(node, selector).next().value;
 }
 
 /**
@@ -121,5 +132,6 @@ export const ast = {
     setAttribute,
     isCustomElement,
     traverse,
-    filter
+    filter,
+    find
 };
