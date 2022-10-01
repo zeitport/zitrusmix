@@ -1,36 +1,48 @@
-import path from 'node:path';
 import { definePageRoute, definePageHead, router } from './router/router.js';
 import { elements } from './state/elements.js';
 import { Options } from './options.js';
 import { scanPages } from './startup/scanPages.js';
+import { loadHeadModule } from './startup/loadHeadModule.js';
+import { log, useLogger } from './log.js';
 
 export { html } from './html.js';
+export { log };
 
 /**
- * @param {Options} [init]
+ * @param {Partial<Options>} [init]
  * @returns
  */
 export async function zitrusmix(init) {
-    const options = new Options(init);
+    try {
+        const options = new Options(init);
 
-    const pages = await scanPages(options);
-    console.log(pages);
+        // Use custom logger
+        useLogger(options.logger);
 
-    for (const page of pages) {
-        definePageRoute(page);
+        // Scan for pages
+        const pages = await scanPages(options);
+
+        for (const page of pages) {
+            definePageRoute(page);
+        }
+
+        // Load the head module
+        const module = await loadHeadModule(options);
+        definePageHead(module.default);
+
+        // #TODO: Add type definition
+        return {
+            router,
+            options,
+            log
+        };
+    } catch (error) {
+        const { message } = /** @type {Error} */(error);
+        log.fatal('Zitrusmix unexpected error: ' + message, { code: 'ZM-5041' });
+
+        await new Promise(resolve => process.nextTick(resolve));
+        throw error;
     }
-
-    const headModulePath = path.join(process.cwd(), options.head);
-    const module = await import(`file://${headModulePath}`);
-    definePageHead(module.default);
-
-    //const head = await import(options.head);
-    //definePageHead(head);
-
-    return {
-        router,
-        options
-    };
 };
 
 /**

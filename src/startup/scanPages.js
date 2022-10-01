@@ -12,11 +12,14 @@ import { ast } from '../utils/ast.js';
 import { metaNames } from './metaNames.js';
 import { PageRoute, PageRouteSource } from './pageRoute.js';
 import { Options } from '../options.js';
+import { log } from '../log.js';
 
 /**
  * @param {Options} options
  */
 export async function scanPages(options) {
+    log.info('Scanning pages...');
+
     const files = await globby(options.pageFiles);
     const pages = [];
 
@@ -31,6 +34,8 @@ export async function scanPages(options) {
 
         pages.push(page);
     }
+
+    log.debug(`${pages.length} pages found`, {pages: pages.map(page => page.route.url)});
 
     return pages;
 }

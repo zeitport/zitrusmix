@@ -12,6 +12,7 @@
     "license": "Apache-2.0",
     "dependencies": {
         "fastify": "^4.6.0",
+        "pino-abstract-transport": "^1.0.0",
         "zitrusmix": "file:../../../"
     }
 }

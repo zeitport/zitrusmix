@@ -2,11 +2,13 @@ import fs from 'node:fs/promises';
 import * as parse5 from 'parse5';
 import { Timeline } from '../utils/timeline.js';
 import { mergeHead } from '../utils/mergeHead.js';
+import { log } from '../../log.js';
 
 /**
  * @typedef {import('../../startup/page').Page} Page
  * @typedef {import('../../templateResult').TemplateResult} TemplateResult
  */
+
 
 export class RenderPagesOptions {
     /**
@@ -31,7 +33,7 @@ export class RenderPagesOptions {
  */
 export async function renderPages(fastify, options, done) {
     for (const page of options.pages) {
-        const pageHandler = async (_, reply) => {
+        const pageHandler = async (request, reply) => {
             try {
                 const timeline = new Timeline();
 
@@ -50,9 +52,8 @@ export async function renderPages(fastify, options, done) {
                 reply.header('Server-Timing', timeline.getPerformanceServerTiming());
                 reply.type('text/html').send(html);
             } catch (error) {
-                console.log(error);
-                const html = `<strong>${error.message}</strong><pre>${error.stack}</pre>`;
-                reply.type('text/html').send(html);
+                log.error(`Render page failed: ${request.url}`);
+                reply.status(500).send();
             }
         };
 

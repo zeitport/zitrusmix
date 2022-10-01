@@ -1,6 +1,7 @@
 import { ast } from '../../utils/ast.js';
 
 /**
+ * @typedef {import('../../types/ast').Node} Node
  * @typedef {import('../../types/ast').Document} Document
  * @typedef {import('../../types/ast').DocumentFragment} DocumentFragment
  */
@@ -36,9 +37,12 @@ function isTag(node) {
 
 /**
  * @param {Node} node
- * @returns {string | object}
+ * @returns {string | Node}
  */
 function getReference(node) {
+    /**
+     * @type {string | Node}
+     */
     let reference = node;
 
     if (node.tagName === 'title') {

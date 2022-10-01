@@ -1,5 +1,3 @@
-import path from "node:path/posix";
-
 export class Options {
     /**
      * @param {Partial<Options> | undefined | null} [partial]
@@ -34,5 +32,10 @@ export class Options {
          * @type {string}
          */
         this.head = partial?.head || './app/head.js';
+
+        /**
+         * @type {import('./types/baseLogger.js').BaseLogger | null}
+         */
+        this.logger = null;
     }
 }

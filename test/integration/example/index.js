@@ -8,10 +8,9 @@ fastify.register(mix.router);
 
 fastify.listen({ port: 3000 }, function (error, address) {
     if (error) {
-        fastify.log.error(error);
-        console.error(error);
+        mix.log.fatal(error.message);
         process.exit(1);
     }
 
-    console.log(`Server is now listening on ${address}`);
+    mix.log.info(`Server is now listening on ${address}`);
 });
