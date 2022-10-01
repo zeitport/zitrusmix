@@ -7,7 +7,7 @@ import { loadHeadModule } from './startup/loadHeadModule.js';
 import { log, useLogger } from './log.js';
 
 export { html } from './html.js';
-export { log };
+export { ZitrusmixElement } from './zitrusmixElement.js';
 
 /**
  * @param {Partial<Options>} [init]
@@ -54,13 +54,20 @@ export async function zitrusmix(init) {
     }
 };
 
-/**
- * @param {import('./types/zitrusmix').ElementDefinition} definition
- */
-export function defineElement(definition) {
-    elements.set(definition.tag, definition.render);
-};
+// /**
+//  * @param {import('./types/zitrusmix').ElementDefinition} definition
+//  */
+// export function defineElement(definition) {
+//     elements.set(definition.tag, definition.render);
+// };
 
-export function element(name, elementCallback) {
-    elements.set(name, elementCallback);
-};
+// export function element(name, elementCallback) {
+//     elements.set(name, elementCallback);
+// };
+
+export const zitrusmixElements = {
+    define(elementName, ElmentConstructor) {
+        log.debug(`Define element ${elementName}`);
+        elements.set(elementName, ElmentConstructor);
+    }
+}

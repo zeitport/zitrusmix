@@ -20,12 +20,13 @@ export function html(strings, ...values) {
     const hosts = /** @type {ChildElement[]} */(ast.filter(fragment, ast.isCustomElement));
 
     for (const host of hosts) {
-        const renderCustomElement = elements.get(host.nodeName);
+        const CustomZitrusmixElement = elements.get(host.nodeName);
 
-        if (renderCustomElement) {
+        if (CustomZitrusmixElement) {
+            const element = new CustomZitrusmixElement();
             const attributes = host.attrs || [];
             const attributeMap = Object.fromEntries(attributes.map(({ name, value }) => [name, value]));
-            const elementResult = renderCustomElement({ html, attrs: attributeMap, attributes });
+            const elementResult = element.render({ html, attrs: attributeMap, attributes });
             const elementFragment = elementResult.fragment;
 
             const slots = ast.filter(elementFragment, childNode => childNode.tagName === 'slot');

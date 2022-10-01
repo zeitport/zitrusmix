@@ -19,7 +19,7 @@ export class PrettyConsoleLogger {
         if (Object.keys(entry).length > 2) {
             const json = JSON.stringify(data, undefined, 2);
             for (const line of json.split('\n')) {
-                console.log(`${''.padEnd(8)} ${chalk.gray(line)}`);
+                console.log(chalk.gray(line));
             }
         }
     }

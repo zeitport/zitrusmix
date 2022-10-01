@@ -3,6 +3,7 @@ import * as parse5 from 'parse5';
 import { Timeline } from '../utils/timeline.js';
 import { mergeHead } from '../utils/mergeHead.js';
 import { log } from '../../log.js';
+import { html } from '../../html.js';
 
 /**
  * @typedef {import('../../startup/page').Page} Page
@@ -47,17 +48,21 @@ export async function renderPages(fastify, options, done) {
                 mergeHead(document, options.head().fragment);
 
                 timeline.mark('render');
-                const html = parse5.serialize(document);
+                const renderedPage = html`
+                    <!DOCTYPE html>
+                    <html>
+                        ${parse5.serialize(document)}
+                    </html>
+                `;
 
                 reply.header('Server-Timing', timeline.getPerformanceServerTiming());
-                reply.type('text/html').send(html);
+                reply.type('text/html').send(renderedPage.text);
             } catch (error) {
-                log.error(`Render page failed: ${request.url}`);
+                log.error(`Render page "${request.url}" failed: ${error.message}`);
                 reply.status(500).send();
             }
         };
 
-        console.log(page.route.url);
         fastify.get(page.route.url, pageHandler);
     }
 
