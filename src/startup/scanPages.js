@@ -18,8 +18,6 @@ import { log } from '../log.js';
  * @param {Options} options
  */
 export async function scanPages(options) {
-    log.info('Scanning pages...');
-
     const files = await globby(options.pageFiles);
     const pages = [];
 
@@ -35,7 +33,7 @@ export async function scanPages(options) {
         pages.push(page);
     }
 
-    log.debug(`${pages.length} pages found`, {pages: pages.map(page => page.route.url)});
+    log.info(`Page scan completed. (${pages.length} pages)`, {status: true});
 
     return pages;
 }

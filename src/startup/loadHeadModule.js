@@ -1,7 +1,6 @@
 import path from 'node:path';
 import fs from 'node:fs';
 import { log } from '../log.js';
-import { checkmark } from '../log/checkmark.js';
 
 /**
  * @typedef {import('../templateResult.js').TemplateResult} TemplateResult
@@ -14,9 +13,6 @@ import { checkmark } from '../log/checkmark.js';
 export async function loadHeadModule(options) {
     const headModulePath = path.join(process.cwd(), options.head);
 
-    log.info('Loading head.js module...');
-    log.debug(headModulePath);
-
     const module = await import(`file://${headModulePath}`).catch(() => null);
 
     if (!module || !module.default) {
@@ -24,12 +20,14 @@ export async function loadHeadModule(options) {
 
         // A blocking IO call during startup is okay.
         const existsFile = fs.existsSync(headModulePath);
-        log.info(`${checkmark(existsFile)} Module file exists at ${headModulePath}`);
-        log.info(`${checkmark(Boolean(module))} Module could be loaded`);
-        log.info(`${checkmark(Boolean(module?.default))} Module has a default export`);
+        log.info(`Module file exists at ${headModulePath}`, {status: existsFile});
+        log.info(`Module could be loaded`, {status: Boolean(module)});
+        log.info(`Module has a default export`, {status: Boolean(module?.default)});
 
         process.exit(-1173);
     }
+
+    log.info(`Module head.js loaded`, {status: true});
 
     return module;
 }

@@ -1,4 +1,5 @@
 import chalk from 'chalk';
+import { formatStatus } from './formatStatus.js';
 import { formatLevel } from './formatLevel.js';
 
 /**
@@ -24,30 +25,45 @@ export class PrettyConsoleLogger {
     }
 
     info(entry) {
-        console.log(`${formatLevel(entry.level)} ${entry.msg}`);
+        const {level, msg, status} = entry;
+        const line = [
+            formatLevel(level),
+            formatStatus(status),
+            msg
+        ].join('');
+        console.log(line);
     }
 
     warn(entry) {
-        console.log(`${formatLevel(entry.level)} ${entry.msg}`);
+        const {level, msg, status} = entry;
+        const line = [
+            formatLevel(level),
+            formatStatus(status),
+            msg
+        ].join('');
+        console.log(line);
     }
 
     error(entry) {
-        const {level, msg, code} = entry;
-        console.log([
+        const {level, msg, status, code} = entry;
+        const line = [
             formatLevel(level),
+            formatStatus(status),
             chalk.blue.underline(code) + ':',
             chalk.bold(msg)
-        ].join(' '));
+        ].join('');
+        console.log(line);
     }
 
     fatal(entry) {
         console.log('\n' + chalk.red.bold(line));
-        const {level, msg, code} = entry;
+        const {level, msg, status, code} = entry;
         console.log([
             formatLevel(level),
+            formatStatus(status),
             chalk.underline(code) + ':',
             chalk.red(msg)
-        ].join(' '));
+        ].join(''));
         console.log(chalk.red.bold(line) + '\n');
     }
 }

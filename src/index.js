@@ -2,6 +2,7 @@ import { definePageRoute, definePageHead, router } from './router/router.js';
 import { elements } from './state/elements.js';
 import { Options } from './options.js';
 import { scanPages } from './startup/scanPages.js';
+import { scanElements } from './startup/scanElements.js';
 import { loadHeadModule } from './startup/loadHeadModule.js';
 import { log, useLogger } from './log.js';
 
@@ -19,6 +20,8 @@ export async function zitrusmix(init) {
         // Use custom logger
         useLogger(options.logger);
 
+        log.info('Starting zitrusmix ...');
+
         // Scan for pages
         const pages = await scanPages(options);
 
@@ -26,9 +29,15 @@ export async function zitrusmix(init) {
             definePageRoute(page);
         }
 
+        // Load custom elements
+        const elements = await scanElements(options);
+
         // Load the head module
         const module = await loadHeadModule(options);
         definePageHead(module.default);
+
+
+        log.debug(`Available page routes`, {routes: pages.map(page => page.route.url)});
 
         // #TODO: Add type definition
         return {

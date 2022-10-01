@@ -19,6 +19,11 @@ export class Options {
         this.pageFiles = partial?.pageFiles || ['./app/pages/**/*.html'];
 
         /**
+         * @type {string | readonly string[]}
+         */
+        this.elementFiles = partial?.elementFiles || ['./app/elements/**/*.js'];
+
+        /**
          * @type {string}
          */
         this.pageRoot = partial?.pageRoot || './app/pages/';
