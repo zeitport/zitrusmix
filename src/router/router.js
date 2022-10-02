@@ -21,7 +21,7 @@ let pageHead = () => new TemplateResult();
  * @param {any} fastify  Encapsulated Fastify Instance
  */
 export async function router(fastify) {
-    fastify.register(renderPages, { pages, head: pageHead})
+    fastify.register(renderPages, { pages, head: pageHead});
 }
 
 /**

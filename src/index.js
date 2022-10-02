@@ -5,6 +5,7 @@ import { scanPages } from './startup/scanPages.js';
 import { scanElements } from './startup/scanElements.js';
 import { loadHeadModule } from './startup/loadHeadModule.js';
 import { log, useLogger } from './log.js';
+import { ElementDefinition } from './state/elementDefinition.js';
 
 export { html } from './html.js';
 export { ZitrusmixElement } from './zitrusmixElement.js';
@@ -37,7 +38,7 @@ export async function zitrusmix(init) {
         definePageHead(module.default);
 
 
-        log.debug(`Available page routes`, {routes: pages.map(page => page.route.url)});
+        log.debug('Available page routes', {routes: pages.map(page => page.route.url)});
 
         // #TODO: Add type definition
         return {
@@ -52,22 +53,22 @@ export async function zitrusmix(init) {
         await new Promise(resolve => process.nextTick(resolve));
         throw error;
     }
-};
-
-// /**
-//  * @param {import('./types/zitrusmix').ElementDefinition} definition
-//  */
-// export function defineElement(definition) {
-//     elements.set(definition.tag, definition.render);
-// };
-
-// export function element(name, elementCallback) {
-//     elements.set(name, elementCallback);
-// };
+}
 
 export const zitrusmixElements = {
-    define(elementName, ElmentConstructor) {
+    define(elementName, ElementConstructor) {
         log.debug(`Define element ${elementName}`);
-        elements.set(elementName, ElmentConstructor);
+
+        const definition = new ElementDefinition({ElementConstructor});
+
+        elements.set(elementName, definition);
+    },
+
+    defineRender(elementName, render) {
+        log.debug(`Define element render function for ${elementName}`);
+
+        const definition = new ElementDefinition({render});
+
+        elements.set(elementName, definition);
     }
-}
+};

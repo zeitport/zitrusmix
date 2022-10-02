@@ -1,8 +1,12 @@
+/**
+ * @typedef {import('../options.js').Options} Options
+ */
+
 import { globby } from 'globby';
 import path from 'node:path/posix';
 import { log } from '../log.js';
-import { Options } from '../options.js';
 import { elements } from '../state/elements.js';
+import process from 'node:process';
 
 /**
  * @param {Options} options
@@ -16,7 +20,7 @@ export async function scanElements(options) {
 
         if (!module) {
             log.fatal(`element module could not be loaded: ${file}`, {code: 'ZM-5659', file});
-            log.info(`Module loaded`, {status: Boolean(module)});
+            log.info('Module loaded', {status: Boolean(module)});
 
             process.exit(-5659);
         }

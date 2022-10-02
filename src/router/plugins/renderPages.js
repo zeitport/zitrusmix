@@ -58,7 +58,8 @@ export async function renderPages(fastify, options, done) {
                 reply.header('Server-Timing', timeline.getPerformanceServerTiming());
                 reply.type('text/html').send(renderedPage.text);
             } catch (error) {
-                log.error(`Render page "${request.url}" failed: ${error.message}`);
+                const { message } = /** @type {Error} */(error);
+                log.error(`Render page "${request.url}" failed: ${message}`);
                 reply.status(500).send();
             }
         };

@@ -1,8 +1,6 @@
-
-import {PageRoute} from './pageRoute.js';
-
 /**
  * @typedef {import('../types/ast.js').Node} Node
+ * @typedef {import('./pageRoute.js').PageRoute} PageRoute
  */
 
 export class Page {
@@ -17,7 +15,7 @@ export class Page {
         this.filepath = init.filepath;
 
         /**
-         * @type {PageRoute}
+         * @type {pageRouteJs.PageRoute}
          * @readonly
          */
         this.route = init.route;

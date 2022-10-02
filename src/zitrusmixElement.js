@@ -2,7 +2,10 @@ export class ZitrusmixElement {
     constructor() {
     }
 
-    render() {
+    /**
+     * @param {import('./types/zitrusmix.js').ElementContext} _
+     */
+    render(_) {
         throw new Error('Not implemented');
     }
 }

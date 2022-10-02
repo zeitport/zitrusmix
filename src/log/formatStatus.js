@@ -6,7 +6,7 @@ const labels = {
     ok: chalk.green('✓ '),
     nok: chalk.red('x '),
     '?': chalk.blue('? ')
-}
+};
 
 /**
  * @param {string | undefined | boolean} status

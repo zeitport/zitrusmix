@@ -14,5 +14,9 @@
         "fastify": "^4.6.0",
         "pino-abstract-transport": "^1.0.0",
         "zitrusmix": "file:../../../"
+    },
+    "devDependencies": {
+        "eslint": "^8.24.0",
+        "eslint-plugin-node": "^11.1.0"
     }
 }

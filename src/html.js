@@ -1,6 +1,6 @@
 import * as parse5 from 'parse5';
 
-import { elements } from './state/elements.js';
+import { getRender } from './state/elements.js';
 import { TemplateResult } from './templateResult.js';
 import { ast } from './utils/ast.js';
 
@@ -20,13 +20,12 @@ export function html(strings, ...values) {
     const hosts = /** @type {ChildElement[]} */(ast.filter(fragment, ast.isCustomElement));
 
     for (const host of hosts) {
-        const CustomZitrusmixElement = elements.get(host.nodeName);
+        const renderElement = getRender(host.nodeName);
 
-        if (CustomZitrusmixElement) {
-            const element = new CustomZitrusmixElement();
+        if (renderElement) {
             const attributes = host.attrs || [];
             const attributeMap = Object.fromEntries(attributes.map(({ name, value }) => [name, value]));
-            const elementResult = element.render({ html, attrs: attributeMap, attributes });
+            const elementResult = renderElement({ html, attrs: attributeMap, attributes });
             const elementFragment = elementResult.fragment;
 
             const slots = ast.filter(elementFragment, childNode => childNode.tagName === 'slot');

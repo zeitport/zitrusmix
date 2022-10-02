@@ -97,7 +97,7 @@ describe('mergeHead()', function () {
 function html(strings, ...values) {
     const raw = String.raw({ raw: strings }, ...values);
     return raw
-        .replaceAll(/\>\s+\</g, '><')
+        .replaceAll(/>\s+</g, '><')
         .replaceAll('\n', '')
         .trim();
 }

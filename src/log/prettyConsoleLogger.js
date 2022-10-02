@@ -1,6 +1,9 @@
+/* eslint-disable no-console */
+
 import chalk from 'chalk';
 import { formatStatus } from './formatStatus.js';
 import { formatLevel } from './formatLevel.js';
+import { formatErrorCode } from './formatErrorCode.js';
 
 /**
  * @typedef {import('../types/baseLogger.js').BaseLogger} BaseLogger
@@ -13,8 +16,8 @@ const line = ''.padEnd(120, '-');
  */
 export class PrettyConsoleLogger {
     debug(entry) {
-        const { level, msg, ...data } = entry;
-        console.log(`${formatLevel(level)} ${chalk.gray(msg)}`);
+        const { msg, ...data } = entry;
+        console.log(chalk.gray(msg));
 
         if (Object.keys(entry).length > 2) {
             const json = JSON.stringify(data, undefined, 2);
@@ -25,9 +28,8 @@ export class PrettyConsoleLogger {
     }
 
     info(entry) {
-        const {level, msg, status} = entry;
+        const {msg, status} = entry;
         const line = [
-            formatLevel(level),
             formatStatus(status),
             msg
         ].join('');
@@ -49,7 +51,7 @@ export class PrettyConsoleLogger {
         const line = [
             formatLevel(level),
             formatStatus(status),
-            chalk.blue.underline(code) + ':',
+            formatErrorCode(code),
             chalk.bold(msg)
         ].join('');
         console.log(line);
@@ -61,7 +63,7 @@ export class PrettyConsoleLogger {
         console.log([
             formatLevel(level),
             formatStatus(status),
-            chalk.underline(code) + ':',
+            formatErrorCode(code),
             chalk.red(msg)
         ].join(''));
         console.log(chalk.red.bold(line) + '\n');

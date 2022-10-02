@@ -1,5 +1,6 @@
 /**
  * @typedef {import('../types/ast.js').Node} Node
+ * @typedef {import('../options.js').Options} Options
  */
 
 import fs from 'node:fs/promises';
@@ -11,7 +12,6 @@ import { Page } from './page.js';
 import { ast } from '../utils/ast.js';
 import { metaNames } from './metaNames.js';
 import { PageRoute, PageRouteSource } from './pageRoute.js';
-import { Options } from '../options.js';
 import { log } from '../log.js';
 
 /**

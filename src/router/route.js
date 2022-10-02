@@ -10,7 +10,7 @@ export class Route {
         /**
          * @type {string}
          */
-         this.url = init.url;
+        this.url = init.url;
 
         /**
          * @type {RouteMethod}

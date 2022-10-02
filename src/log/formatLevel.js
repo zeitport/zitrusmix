@@ -9,11 +9,11 @@ const labels = {
         style: chalk.gray
     },
     info: {
-        text: 'info ',
+        text: 'info',
         style: chalk.white
     },
     warn: {
-        text: 'warn ',
+        text: 'warn',
         style: chalk.yellow.bold
     },
     error: {
@@ -21,10 +21,10 @@ const labels = {
         style: chalk.red.bold
     },
     fatal: {
-        text: 'FATAL ',
+        text: 'FATAL',
         style: chalk.bgRed.white.bold
     }
-}
+};
 
 /**
  * @param {string} level
@@ -32,7 +32,7 @@ const labels = {
  */
 export function formatLevel(level) {
     const label = labels[level] || labels.info;
-    const text = `[${label.text}]`;
+    const text = `${label.text}`;
     const styledText = label.style(text);
 
     return styledText + ' ';
