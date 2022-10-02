@@ -11,10 +11,11 @@
     ],
     "scripts": {
         "compile": "tsc",
+        "lint": "npm run eslint:fix",
         "test": "mocha ./test/unit/**/*.js",
         "test:watch": "nodemon --exec \"npm test\"",
-        "lint": "eslint ./src ./test",
-        "lint:fix": "eslint ./src --fix",
+        "eslint": "eslint ./src ./test",
+        "eslint:fix": "eslint ./src --fix --cache",
         "tool:createErrorId": "node ./tools/createErrorId.js"
     },
     "repository": {
@@ -39,6 +40,8 @@
         "@types/node": "^18.7.23",
         "chai": "^4.3.6",
         "eslint": "^8.23.1",
+        "eslint-plugin-jsdoc": "^39.3.6",
+        "eslint-plugin-json-es": "^1.5.7",
         "eslint-plugin-node": "^11.1.0",
         "mocha": "^10.0.0",
         "nanoid": "^4.0.0",

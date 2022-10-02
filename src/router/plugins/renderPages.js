@@ -31,6 +31,7 @@ export class RenderPagesOptions {
 /**
  * @param {any} fastify
  * @param {RenderPagesOptions} options
+ * @param {function(): void} done
  */
 export async function renderPages(fastify, options, done) {
     for (const page of options.pages) {

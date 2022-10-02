@@ -1,3 +1,9 @@
+/**
+ * @typedef {import('./types/ast').Element} Element
+ * @typedef {import('./types/ast').ChildElement} ChildElement
+ * @typedef {import('./types/ast').Node} Node
+ */
+
 import * as parse5 from 'parse5';
 
 import { getRender } from './state/elements.js';
@@ -5,11 +11,8 @@ import { TemplateResult } from './templateResult.js';
 import { ast } from './utils/ast.js';
 
 /**
- * @typedef {import('./types/ast').Element} Element
- * @typedef {import('./types/ast').ChildElement} ChildElement
- */
-
-/**
+ * @param {string[]} strings
+ * @param {any[]} values
  * @returns {TemplateResult}
  */
 export function html(strings, ...values) {
@@ -77,6 +80,7 @@ export function html(strings, ...values) {
 }
 
 /**
+ * @param {Node[]} slots
  * @returns {Map<string | null, Element>}
  */
 function createSlotMap(slots) {

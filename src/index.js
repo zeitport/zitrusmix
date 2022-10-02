@@ -15,44 +15,36 @@ export { ZitrusmixElement } from './zitrusmixElement.js';
  * @returns
  */
 export async function zitrusmix(init) {
-    try {
-        const options = new Options(init);
+    const options = new Options(init);
 
-        // Use custom logger
-        useLogger(options.logger);
+    // Use custom logger
+    useLogger(options.logger);
 
-        log.info('Starting zitrusmix ...');
+    log.info('Starting zitrusmix ...');
 
-        // Scan for pages
-        const pages = await scanPages(options);
+    // Scan for pages
+    const pages = await scanPages(options);
 
-        for (const page of pages) {
-            definePageRoute(page);
-        }
-
-        // Load custom elements
-        const elements = await scanElements(options);
-
-        // Load the head module
-        const module = await loadHeadModule(options);
-        definePageHead(module.default);
-
-
-        log.debug('Available page routes', {routes: pages.map(page => page.route.url)});
-
-        // #TODO: Add type definition
-        return {
-            router,
-            options,
-            log
-        };
-    } catch (error) {
-        const { message } = /** @type {Error} */(error);
-        log.fatal('Zitrusmix unexpected error: ' + message, { code: 'ZM-5041' });
-
-        await new Promise(resolve => process.nextTick(resolve));
-        throw error;
+    for (const page of pages) {
+        definePageRoute(page);
     }
+
+    // Load custom elements
+    await scanElements(options);
+
+    // Load the head module
+    const module = await loadHeadModule(options);
+    definePageHead(module.default);
+
+
+    log.debug('Available page routes', {routes: pages.map(page => page.route.url)});
+
+    // #TODO: Add type definition
+    return {
+        router,
+        options,
+        log
+    };
 }
 
 export const zitrusmixElements = {

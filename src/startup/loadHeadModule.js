@@ -16,7 +16,8 @@ export async function loadHeadModule(options) {
     const module = await import(`file://${headModulePath}`).catch(() => null);
 
     if (!module || !module.default) {
-        log.fatal('head.js module could not be loaded', {code: 'ZM-1173'});
+        const error = 'head.js module could not be loaded';
+        log.fatal(error, {code: 'ZM-1173'});
 
         // A blocking IO call during startup is okay.
         // eslint-disable-next-line node/no-sync
@@ -26,7 +27,7 @@ export async function loadHeadModule(options) {
         log.info('Module could be loaded', {status: Boolean(module)});
         log.info('Module has a default export', {status: Boolean(module?.default)});
 
-        process.exit(-1173);
+        throw new Error(error);
     }
 
     log.info('Module head.js loaded', {status: true});

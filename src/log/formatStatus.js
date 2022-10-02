@@ -10,6 +10,7 @@ const labels = {
 
 /**
  * @param {string | undefined | boolean} status
+ * @returns {string}
  */
 export function formatStatus(status) {
     return labels[status?.toString().toLowerCase()] || '';

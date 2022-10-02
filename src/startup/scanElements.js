@@ -10,6 +10,7 @@ import process from 'node:process';
 
 /**
  * @param {Options} options
+ * @returns {Promise<void>}
  */
 export async function scanElements(options) {
     const files = await globby(options.elementFiles);
@@ -19,10 +20,12 @@ export async function scanElements(options) {
         const module = await import(`file://${modulePath}`).catch(() => log.error('ERROR'));
 
         if (!module) {
-            log.fatal(`element module could not be loaded: ${file}`, {code: 'ZM-5659', file});
+            const error = `Element module could not be loaded: ${file}`;
+
+            log.fatal(error, {code: 'ZM-5659', file});
             log.info('Module loaded', {status: Boolean(module)});
 
-            process.exit(-5659);
+            throw new Error(error);
         }
     }
 

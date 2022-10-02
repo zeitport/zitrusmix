@@ -44,6 +44,7 @@ export function setAttribute(node, attributeName, value) {
 /**
  * @param {Node} node
  * @param {string} attributeName
+ * @returns {boolean}
  */
 export function hasAttribute(node, attributeName) {
     const attribute = node.attrs?.find(attr => attr.name === attributeName);
