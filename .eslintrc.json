@@ -27,7 +27,6 @@
             "exports"
         ],
         "node/file-extension-in-import": "error",
-        "node/no-process-env": "error",
         "node/no-sync": "error",
         "node/no-unsupported-features/es-syntax": "off",
         "node/no-path-concat": "error",

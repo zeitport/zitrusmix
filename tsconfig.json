@@ -2,7 +2,6 @@
     "compilerOptions": {
         "module": "esnext",
         "lib": [
-            "ES6",
             "ES2022",
             "ES2021.String"
         ],

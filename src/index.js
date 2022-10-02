@@ -6,6 +6,7 @@ import { scanElements } from './startup/scanElements.js';
 import { loadHeadModule } from './startup/loadHeadModule.js';
 import { log, useLogger } from './log.js';
 import { ElementDefinition } from './state/elementDefinition.js';
+import { scanApi } from './startup/scanApi.js';
 
 export { html } from './html.js';
 export { ZitrusmixElement } from './zitrusmixElement.js';
@@ -31,6 +32,7 @@ export async function zitrusmix(init) {
 
     // Load custom elements
     await scanElements(options);
+    await scanApi(options);
 
     // Load the head module
     const module = await loadHeadModule(options);

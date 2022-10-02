@@ -11,5 +11,6 @@ fastify.listen({ port: 3000 }, function (error, address) {
         mix.log.fatal(error.message);
     }
 
+    mix.log.info(new Date().toLocaleTimeString());
     mix.log.info(`Server is now listening on ${address}`);
 });
