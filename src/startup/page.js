@@ -15,7 +15,7 @@ export class Page {
         this.filepath = init.filepath;
 
         /**
-         * @type {pageRouteJs.PageRoute}
+         * @type {PageRoute}
          * @readonly
          */
         this.route = init.route;

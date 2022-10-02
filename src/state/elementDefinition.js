@@ -1,5 +1,5 @@
 /**
- * @typedef {import('../zitrusmixElement.js').ZitrusmixElement} ZitrusmixElement;
+ * @typedef {import('../mixElement.js').MixElement} MixElement;;
  * @typedef {import('../types/zitrusmix.js').renderFn} renderFn;
  */
 export class ElementDefinition {
@@ -8,7 +8,7 @@ export class ElementDefinition {
      */
     constructor(init) {
         /**
-         * @type {(new () => ZitrusmixElement) | null}
+         * @type {(new () => MixElement) | null}
          */
         this.ElementConstructor = init.ElementConstructor || null;
 

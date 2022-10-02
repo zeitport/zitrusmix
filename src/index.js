@@ -9,7 +9,7 @@ import { ElementDefinition } from './state/elementDefinition.js';
 import { scanApi } from './startup/scanApi.js';
 
 export { html } from './html.js';
-export { ZitrusmixElement } from './zitrusmixElement.js';
+export { MixElement } from './mixElement.js';
 
 /**
  * @param {Partial<Options>} [init]

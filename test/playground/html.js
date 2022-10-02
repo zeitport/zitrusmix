@@ -1,14 +1,14 @@
-import { zitrusmixElements, ZitrusmixElement } from '../../src/index.js';
+import { zitrusmixElements, MixElement } from '../../src/index.js';
 import { html } from '../../src/html.js';
 
 
-class ActorCard extends ZitrusmixElement {
+class ActorCard extends MixElement {
     render({html}) {
         return html`<slot name="first"></slot><slot name="last"></slot>`;
     }
 }
 
-class FruitShopHeader extends ZitrusmixElement {
+class FruitShopHeader extends MixElement {
     render({html}) {
         return html`<header><h1>🍋 Fruits</h1></header>`;
     }

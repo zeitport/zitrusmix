@@ -11,7 +11,7 @@ import { TemplateResult } from './templateResult.js';
 import { ast } from './utils/ast.js';
 
 /**
- * @param {string[]} strings
+ * @param {TemplateStringsArray} strings
  * @param {any[]} values
  * @returns {TemplateResult}
  */

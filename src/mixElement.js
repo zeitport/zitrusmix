@@ -1,4 +1,4 @@
-export class ZitrusmixElement {
+export class MixElement {
     constructor() {
     }
 
