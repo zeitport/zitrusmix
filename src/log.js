@@ -56,7 +56,7 @@ const log = {
         const entry = { msg: message, level: 'error', ...data };
         baseLogger?.error?.(entry);
 
-        if (data.code) {
+        if (data && data.code) {
             process.exitCode = -parseCode(data.code);
         }
     },
@@ -70,7 +70,7 @@ const log = {
         const entry = { msg: message, level: 'fatal', ...data };
         baseLogger?.fatal?.(entry);
 
-        if (data.code) {
+        if (data && data.code) {
             process.exitCode = -parseCode(data.code);
         }
     }
