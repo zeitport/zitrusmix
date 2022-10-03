@@ -1,3 +1,5 @@
+import Fastify from 'fastify';
+
 import { definePageRoute, definePageHead, router } from './router/router.js';
 import { elements } from './state/elements.js';
 import { Options } from './options.js';
@@ -11,6 +13,8 @@ import { scanApi } from './startup/scanApi.js';
 export { html } from './html.js';
 export { css } from './css.js';
 export { MixElement } from './mixElement.js';
+
+const fastify = Fastify();
 
 /**
  * @param {Partial<Options>} [init]
@@ -42,12 +46,24 @@ export async function zitrusmix(init) {
 
     log.debug('Available page routes', {routes: pages.map(page => page.route.url)});
 
+
+    fastify.register(router);
+
     // #TODO: Add type definition
     return {
-        router,
         options,
-        log
+        fastify,
+        log,
+        listen
     };
+}
+
+/**
+ * @param {import('fastify/types/instance.js').FastifyListenOptions} options
+ * @param {(err: Error | null, address: string) => void} callback
+ */
+function listen(options, callback) {
+    fastify.listen(options, callback);
 }
 
 export const mixElements = {

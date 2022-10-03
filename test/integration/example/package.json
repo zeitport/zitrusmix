@@ -12,7 +12,6 @@
     "author": "Christian Schuller <chris@zeitport.com>",
     "license": "Apache-2.0",
     "dependencies": {
-        "fastify": "^4.6.0",
         "zitrusmix": "file:../../../"
     },
     "devDependencies": {
