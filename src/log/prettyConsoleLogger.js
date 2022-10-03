@@ -6,7 +6,7 @@ import { formatLevel } from './formatLevel.js';
 import { formatErrorCode } from './formatErrorCode.js';
 
 /**
- * @typedef {import('../types/baseLogger.js').BaseLogger} BaseLogger
+ * @typedef {import('../../types/baseLogger.js').BaseLogger} BaseLogger
  */
 
 const line = ''.padEnd(120, '-');

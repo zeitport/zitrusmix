@@ -1,9 +1,9 @@
 /**
- * @typedef {import('../types/ast.js').Node} Node
- * @typedef {import('../types/ast.js').Element} Element
- * @typedef {import('../types/ast.js').nodeCallbackFn} nodeCallbackFn
- * @typedef {import('../types/ast.js').ElementCallbackFn} ElementCallbackFn
- * @typedef {import('../types/ast.js').ChildNode} ChildNode
+ * @typedef {import('../../types/ast.js').Node} Node
+ * @typedef {import('../../types/ast.js').Element} Element
+ * @typedef {import('../../types/ast.js').nodeCallbackFn} nodeCallbackFn
+ * @typedef {import('../../types/ast.js').ElementCallbackFn} ElementCallbackFn
+ * @typedef {import('../../types/ast.js').ChildNode} ChildNode
  */
 
 /**

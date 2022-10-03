@@ -1,7 +1,7 @@
 /**
- * @typedef {import('./types/ast').Element} Element
- * @typedef {import('./types/ast').ChildElement} ChildElement
- * @typedef {import('./types/ast').Node} Node
+ * @typedef {import('../types/ast').Element} Element
+ * @typedef {import('../types/ast').ChildElement} ChildElement
+ * @typedef {import('../types/ast').Node} Node
  */
 
 import * as parse5 from 'parse5';

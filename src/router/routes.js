@@ -1,5 +1,5 @@
 /**
- * @typedef {import('../types/zitrusmix').routeCallback} routeCallback
+ * @typedef {import('../../types/zitrusmix').routeCallback} routeCallback
  */
 
 /**

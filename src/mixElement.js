@@ -3,7 +3,7 @@ export class MixElement {
     }
 
     /**
-     * @param {import('./types/zitrusmix.js').ElementContext} _
+     * @param {import('../types/zitrusmix.js').ElementContext} _
      */
     render(_) {
         throw new Error('Not implemented');

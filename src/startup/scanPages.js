@@ -1,5 +1,5 @@
 /**
- * @typedef {import('../types/ast.js').Node} Node
+ * @typedef {import('../../types/ast.js').Node} Node
  * @typedef {import('../options.js').Options} Options
  */
 

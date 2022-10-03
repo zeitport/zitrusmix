@@ -1,7 +1,7 @@
 import { PrettyConsoleLogger } from './log/prettyConsoleLogger.js';
 
 /**
- * @typedef {import('./types/baseLogger.js').BaseLogger} BaseLogger
+ * @typedef {import('../types/baseLogger.js').BaseLogger} BaseLogger
  */
 
 /**

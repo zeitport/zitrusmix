@@ -1,5 +1,5 @@
 /**
- * @typedef {import('../types/ast.js').Node} Node
+ * @typedef {import('../../types/ast.js').Node} Node
  * @typedef {import('./pageRoute.js').PageRoute} PageRoute
  */
 

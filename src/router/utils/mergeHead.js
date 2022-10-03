@@ -1,9 +1,9 @@
 import { ast } from '../../utils/ast.js';
 
 /**
- * @typedef {import('../../types/ast').Node} Node
- * @typedef {import('../../types/ast').Document} Document
- * @typedef {import('../../types/ast').DocumentFragment} DocumentFragment
+ * @typedef {import('../../../types/ast').Node} Node
+ * @typedef {import('../../../types/ast').Document} Document
+ * @typedef {import('../../../types/ast').DocumentFragment} DocumentFragment
  */
 
 /**

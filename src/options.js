@@ -39,7 +39,7 @@ export class Options {
         this.head = partial?.head || './app/head.js';
 
         /**
-         * @type {import('./types/baseLogger.js').BaseLogger | null}
+         * @type {import('../types/baseLogger.js').BaseLogger | null}
          */
         this.logger = null;
     }
