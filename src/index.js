@@ -9,6 +9,7 @@ import { ElementDefinition } from './state/elementDefinition.js';
 import { scanApi } from './startup/scanApi.js';
 
 export { html } from './html.js';
+export { css } from './css.js';
 export { MixElement } from './mixElement.js';
 
 /**
@@ -49,7 +50,7 @@ export async function zitrusmix(init) {
     };
 }
 
-export const zitrusmixElements = {
+export const mixElements = {
     define(elementName, ElementConstructor) {
         log.debug(`Define element ${elementName}`);
 

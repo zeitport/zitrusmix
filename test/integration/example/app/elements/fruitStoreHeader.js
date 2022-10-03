@@ -1,4 +1,4 @@
-import { zitrusmixElements, MixElement } from 'zitrusmix';
+import { MixElement, css, mixElements } from 'zitrusmix';
 
 class FruitStoreHeader extends MixElement {
     constructor() {
@@ -21,4 +21,4 @@ class FruitStoreHeader extends MixElement {
     }
 }
 
-zitrusmixElements.define('fruit-store-header', FruitStoreHeader);
+mixElements.define('fruit-store-header', FruitStoreHeader);

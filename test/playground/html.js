@@ -1,4 +1,4 @@
-import { zitrusmixElements, MixElement } from '../../src/index.js';
+import { mixElements, MixElement } from '../../src/index.js';
 import { html } from '../../src/html.js';
 
 
@@ -14,8 +14,8 @@ class FruitShopHeader extends MixElement {
     }
 }
 
-zitrusmixElements.define('actor-card', ActorCard);
-zitrusmixElements.define('fruit-shop-header', FruitShopHeader);
+mixElements.define('actor-card', ActorCard);
+mixElements.define('fruit-shop-header', FruitShopHeader);
 
 const result = html`<fruit-shop-header></fruit-shop-header>`;
 
