@@ -12,7 +12,7 @@
     "author": "Christian Schuller <chris@zeitport.com>",
     "license": "Apache-2.0",
     "dependencies": {
-        "zitrusmix": "file:../../../"
+        "zitrusmix": "file:../../"
     },
     "devDependencies": {
         "eslint": "^8.24.0",

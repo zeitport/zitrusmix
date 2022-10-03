@@ -1,5 +1,0 @@
-# Installation integration
-
-```
-npm install
-```
