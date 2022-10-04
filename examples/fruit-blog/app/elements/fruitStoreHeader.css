@@ -1,7 +1,0 @@
-h1 {
-    font-size: 100px;
-}
-
-:host {
-    border: solid 1px hsl(190, 57%, 34%);
-}

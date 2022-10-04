@@ -34,7 +34,8 @@
         "fastify": "^4.7.0",
         "globby": "^13.1.2",
         "parse5": "^7.1.1",
-        "postcss-modules": "^5.0.0"
+        "postcss-modules": "^5.0.0",
+        "#self": "file:./"
     },
     "engines": {
         "node": ">=16.0.0"

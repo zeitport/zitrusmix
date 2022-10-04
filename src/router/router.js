@@ -1,4 +1,5 @@
-import { TemplateResult } from '../templateResult.js';
+import { HtmlTemplateResult } from '../tags/htmlTemplateResult.js';
+import { mixStylesheet } from './plugins/mixStylesheet.js';
 import { renderPages } from './plugins/renderPages.js';
 
 /**
@@ -12,9 +13,9 @@ import { renderPages } from './plugins/renderPages.js';
 const pages = new Set();
 
 /**
- * @type {function(): TemplateResult}
+ * @type {function(): HtmlTemplateResult}
  */
-let pageHead = () => new TemplateResult();
+let pageHead = () => new HtmlTemplateResult();
 
 /**
  * Encapsulates the routes
@@ -22,6 +23,7 @@ let pageHead = () => new TemplateResult();
  */
 export async function router(fastify) {
     fastify.register(renderPages, { pages, head: pageHead});
+    fastify.register(mixStylesheet);
 }
 
 /**
@@ -32,7 +34,7 @@ export function definePageRoute(page) {
 }
 
 /**
- * @param {function(): TemplateResult} head
+ * @param {function(): HtmlTemplateResult} head
  */
 export function definePageHead(head) {
     pageHead = head;

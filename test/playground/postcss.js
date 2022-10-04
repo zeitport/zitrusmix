@@ -6,7 +6,7 @@ import { customAlphabet, nanoid } from 'nanoid';
 
 const css = `
     .test { color: red; }
-    .test.test2 { color: getRender;}
+    .test.test2 { color: red;}
     .test[data-mono] { font-family: monospace;}
 `;
 
@@ -29,10 +29,23 @@ const options = {
     }
 };
 
-const result = await postcss([
+const plugins = () => [
     autoprefixer,
     nested,
     modules({ generateScopedName })
-]).process(css, options);
-console.log(result.css);
-console.log(classNameMap);
+];
+
+const result1 = await postcss(plugins()).process(css, options);
+const result2 = await postcss(plugins()).process(css, options);
+
+const document = postcss.document()
+document.append(result1.css)
+document.append(result2.css)
+const allCss = document.toResult({
+    to: 'all.css', map: {
+        absolute: false,
+        inline: false
+    }
+});
+
+console.log(allCss);

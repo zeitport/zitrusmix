@@ -33,7 +33,8 @@ export async function scanPages(options) {
         pages.push(page);
     }
 
-    log.info(`Page scan completed. (${pages.length} pages)`, {status: true});
+    log.info(`Page scan completed.`, {status: true});
+    log.debug(`${pages.length} pages found.`);
 
     return pages;
 }

@@ -1,11 +1,13 @@
 export class MixElement {
-    constructor() {
-    }
+    /**
+     * @type {import('./tags/cssTemplateResult.js').CssTemplateResult | undefined | null}
+     */
+    static styles = null;
 
     /**
-     * @param {import('../types/zitrusmix.js').ElementContext} _
+     * @param {import('../types/mixElement.js').ElementContext} _
      */
     render(_) {
-        throw new Error('Not implemented');
+        throw new Error('Not implemented!');
     }
 }

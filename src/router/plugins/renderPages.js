@@ -3,11 +3,11 @@ import * as parse5 from 'parse5';
 import { Timeline } from '../utils/timeline.js';
 import { mergeHead } from '../utils/mergeHead.js';
 import { log } from '../../log.js';
-import { html } from '../../html.js';
+import { html } from '../../tags/html.js';
 
 /**
  * @typedef {import('../../startup/page').Page} Page
- * @typedef {import('../../templateResult').TemplateResult} TemplateResult
+ * @typedef {import('../../tags/htmlTemplateResult').HtmlTemplateResult} HtmlTemplateResult
  */
 
 
@@ -22,7 +22,7 @@ export class RenderPagesOptions {
         this.pages = init.pages;
 
         /**
-         * @type {function(): TemplateResult}
+         * @type {function(): HtmlTemplateResult}
          */
         this.head = init.head;
     }

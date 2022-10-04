@@ -1,17 +1,11 @@
-import { TemplateResult } from '../templateResult';
+import { HtmlTemplateResult } from '../src/tags/HtmlTemplateResult.js';
 import { Attribute } from './ast';
 import { html } from './html';
 
-// export type html = function(strings, ...values): TemplateResult
+// export type html = function(strings, ...values): HtmlTemplateResult
 
 export interface ZitrusmixOptions {
     app: string | readonly string[];
-}
-
-export interface ElementContext {
-    html: html,
-    attrs: Record<string, string>,
-    attributes: Attribute[]
 }
 
 export interface RouteContext {
@@ -22,7 +16,5 @@ export interface StyleContext {
     css: css
 }
 
-export type renderFn = function(ElementContext): TemplateResult;
-export type styleFn = function(StyleContext): StyleResult;
-
-export type routeCallback = function(RouteContext): TemplateResult;
+export type routeCallback = function(RouteContext): HtmlTemplateResult;
+export type ElementName = string;

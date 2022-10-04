@@ -1,6 +1,4 @@
-import { expect } from './sandbox.js';
-import { html } from '../../src/html.js';
-import { mixElements } from '../../src/index.js';
+import { css, expect, html, MixElement, mixElements} from '../sandbox.js';
 
 describe('html()', function () {
     describe('expressions', function () {
@@ -63,7 +61,7 @@ describe('html()', function () {
         });
     });
 
-    describe('custom element + slots', function () {
+    describe('slots', function () {
         it('renders a slot', function () {
             // Given
             mixElements.defineRender('my-element', ({ html }) => html`<h1>Hello!</h1><p><slot></slot></p>`);
@@ -120,6 +118,26 @@ describe('html()', function () {
 
             // Then
             expect(result.text).to.equal('<my-page><header><h1>Fruits</h1></header><p>Lemon</p><p>Apple</p></my-page>');
+        });
+    });
+
+    describe('scoped CSS class names', function () {
+        it('uses scopes CSS class names', function () {
+            // Given
+            class TestElement extends MixElement {
+                static styles = css`.hero-title { color: blue;}`;
+                render({html}) {
+                    return html`<h1 class="hero-title">Hero</h1>`;
+                };
+            };
+
+            mixElements.define('test-element', TestElement);
+
+            // When
+            const result = html`<h1 class="hero-title">Hero</h1>`;
+
+            // Then
+            expect(result.text).to.equal('<h1 class="hero-title-12345">Hero</h1>');
         });
     });
 });

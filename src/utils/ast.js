@@ -80,9 +80,10 @@ export function isCustomElement(node) {
 /**
  * @param {Node} node
  * @param {ElementCallbackFn} selector
+ * @param {ElementCallbackFn} deep
  * @returns {Generator<Element, null>}
  */
-export function* traverse(node, selector = all) {
+export function* traverse(node, selector = all, deep = all) {
     if (node.childNodes) {
         for (const childNode of node.childNodes) {
             if (isElement(childNode)) {
@@ -90,8 +91,10 @@ export function* traverse(node, selector = all) {
                     yield childNode;
                 }
 
-                if (childNode.childNodes) {
-                    yield* traverse(childNode, selector);
+                if (deep(childNode)) {
+                    if (childNode.childNodes) {
+                        yield* traverse(childNode, selector);
+                    }
                 }
             }
         }

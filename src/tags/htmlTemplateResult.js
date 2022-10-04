@@ -1,13 +1,17 @@
 import { defaultTreeAdapter } from 'parse5';
 
 /**
- * @typedef {import('../types/ast').DocumentFragment} DocumentFragment
- * @typedef {import('../types/ast').Document} Document
+ * @typedef {import('../../types/ast').DocumentFragment} DocumentFragment
+ * @typedef {import('../../types/ast').Document} Document
  */
 
-export class TemplateResult {
+/**
+ * Use the html (./html.js) tagged template literal to create a HtmlTemplateResult.
+ * @example html`<h1>Hello</h1>`;
+ */
+export class HtmlTemplateResult {
     /**
-     * @param {Partial<TemplateResult>} [partial]
+     * @param {Partial<HtmlTemplateResult>} [partial]
      */
     constructor(partial) {
         /**

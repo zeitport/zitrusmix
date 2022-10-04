@@ -2,11 +2,13 @@
  * @typedef {import('../options.js').Options} Options
  */
 
-import { globby } from 'globby';
 import path from 'node:path/posix';
+import process from 'node:process';
+import { globby } from 'globby';
+
 import { log } from '../log.js';
 import { elements } from '../state/elements.js';
-import process from 'node:process';
+import { mixStyle } from '../state/mixStyle.js';
 
 /**
  * @param {Options} options
@@ -29,5 +31,7 @@ export async function scanElements(options) {
         }
     }
 
-    log.info(`Element scan completed. (${elements.size} elements)`, {status: true});
+    log.info(`Element scan completed.`, {status: true});
+    log.debug(`${elements.size} elements found.`);
+    log.debug(`${mixStyle.map.size} styles found.`);
 }

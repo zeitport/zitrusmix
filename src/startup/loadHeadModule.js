@@ -3,12 +3,12 @@ import fs from 'node:fs';
 import { log } from '../log.js';
 
 /**
- * @typedef {import('../templateResult.js').TemplateResult} TemplateResult
+ * @typedef {import('../tags/htmlTemplateResult.js').HtmlTemplateResult} HtmlTemplateResult
  */
 
 /**
  * @param {*} options
- * @returns {Promise<{default: () => TemplateResult}>}
+ * @returns {Promise<{default: () => HtmlTemplateResult}>}
  */
 export async function loadHeadModule(options) {
     const headModulePath = path.join(process.cwd(), options.head);

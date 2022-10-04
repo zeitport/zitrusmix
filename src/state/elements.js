@@ -1,31 +1,8 @@
 /**
- * @typedef {import('./elementDefinition.js').ElementDefinition} ElementDefinition
+ * @typedef {import('../../types/mixElement.js').MixElementConstructor} MixElementConstructor
  */
 
 /**
- * @type {Map<string, ElementDefinition>}
+ * @type {Map<string, MixElementConstructor>}
  */
 export const elements = new Map();
-
-/**
- * @param {string} elementName
- * @returns {renderFn | undefined}}
- */
-export function getRender(elementName) {
-    let renderFn;
-
-    const definition = elements.get(elementName);
-
-    if (definition) {
-        if (definition.ElementConstructor) {
-            const element = new definition.ElementConstructor();
-            renderFn = context => element.render(context);
-        }
-
-        if (definition.render) {
-            renderFn = definition.render;
-        }
-    }
-
-    return renderFn;
-}

@@ -1,18 +1,17 @@
 import Fastify from 'fastify';
 
 import { definePageRoute, definePageHead, router } from './router/router.js';
-import { elements } from './state/elements.js';
 import { Options } from './options.js';
 import { scanPages } from './startup/scanPages.js';
 import { scanElements } from './startup/scanElements.js';
 import { loadHeadModule } from './startup/loadHeadModule.js';
 import { log, useLogger } from './log.js';
-import { ElementDefinition } from './state/elementDefinition.js';
 import { scanApi } from './startup/scanApi.js';
 
-export { html } from './html.js';
-export { css } from './css.js';
+export { css, html } from './tags/tags.js';
 export { MixElement } from './mixElement.js';
+export { mixElements } from './mixElements.js';
+import { createMixStyle } from './startup/createMixStyle.js';
 
 const fastify = Fastify();
 
@@ -38,6 +37,9 @@ export async function zitrusmix(init) {
     // Load custom elements
     await scanElements(options);
     await scanApi(options);
+
+    // Create mix style
+    await createMixStyle();
 
     // Load the head module
     const module = await loadHeadModule(options);
@@ -65,21 +67,3 @@ export async function zitrusmix(init) {
 function listen(options, callback) {
     fastify.listen(options, callback);
 }
-
-export const mixElements = {
-    define(elementName, ElementConstructor) {
-        log.debug(`Define element ${elementName}`);
-
-        const definition = new ElementDefinition({ElementConstructor});
-
-        elements.set(elementName, definition);
-    },
-
-    defineRender(elementName, render) {
-        log.debug(`Define element render function for ${elementName}`);
-
-        const definition = new ElementDefinition({render});
-
-        elements.set(elementName, definition);
-    }
-};
