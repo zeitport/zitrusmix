@@ -24,6 +24,18 @@ export function renderMixElement(node) {
         const elementResult = element.render({ html, attrs: attributeMap, attributes});
         const elementFragment = elementResult.fragment;
 
+        // Use scopeds class names
+        if (ElementConstructor.styles) {
+            const styledElements = ast.filter(elementFragment, node => ast.hasAttribute(node, 'class'));
+            for (const node of styledElements) {
+                const value = ast.getAttribute(node, 'class');
+                const classNames = value?.split(' ') || [];
+                const scopedClassNames = classNames.map(className => `${className}-${ElementConstructor.styles?.moduleId}`);
+                ast.setAttribute(node, 'class', scopedClassNames.join(' '));
+            }
+        }
+
+        // Detect slots
         const slots = ast.filter(elementFragment, childNode => childNode.tagName === 'slot');
         const slotMap = createSlotMap(slots);
         const slottedChildElements = ast.filter(node, node => ast.hasAttribute(node, 'slot'));
@@ -63,19 +75,16 @@ export function renderMixElement(node) {
 
         node.childNodes = elementFragment.childNodes;
         elementResult.text = parse5.serialize(elementFragment);
-
-        // Use scoped class names
-        
     } else {
         log.warn('No render function found for "${node.nodeName}".');
     }
-};
+}
 
 /**
  * @param {Node[]} slots
  * @returns {Map<string | null, Element>}
  */
- function createSlotMap(slots) {
+function createSlotMap(slots) {
     const slotMap = new Map();
 
     for (const slot of slots) {

@@ -31,7 +31,7 @@ export async function scanElements(options) {
         }
     }
 
-    log.info(`Element scan completed.`, {status: true});
+    log.info('Element scan completed.', {status: true});
     log.debug(`${elements.size} elements found.`);
     log.debug(`${mixStyle.map.size} styles found.`);
 }

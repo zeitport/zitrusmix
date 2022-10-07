@@ -5,7 +5,7 @@ import autoprefixer from 'autoprefixer';
 import { mixStyle } from '../state/mixStyle.js';
 
 export async function createMixStyle() {
-    const document = postcss.document()
+    const document = postcss.document();
 
     for await (const[name, style] of mixStyle.map) {
         const options = {

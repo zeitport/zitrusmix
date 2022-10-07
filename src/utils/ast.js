@@ -78,24 +78,22 @@ export function isCustomElement(node) {
 }
 
 /**
- * @param {Node} node
+ * @param {Element | Node} node
  * @param {ElementCallbackFn} selector
- * @param {ElementCallbackFn} deep
+ * @param {ElementCallbackFn} recursive
  * @returns {Generator<Element, null>}
  */
-export function* traverse(node, selector = all, deep = all) {
+export function* traverse(node, selector = all, recursive = all) {
+    if (isElement(node)) {
+        if (selector(node)) {
+            yield node;
+        }
+    }
+
     if (node.childNodes) {
         for (const childNode of node.childNodes) {
-            if (isElement(childNode)) {
-                if (selector(childNode)) {
-                    yield childNode;
-                }
-
-                if (deep(childNode)) {
-                    if (childNode.childNodes) {
-                        yield* traverse(childNode, selector);
-                    }
-                }
+            if (isElement(childNode) && recursive(childNode)) {
+                yield* traverse(childNode, selector);
             }
         }
     }
