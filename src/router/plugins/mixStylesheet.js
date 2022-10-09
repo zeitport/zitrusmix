@@ -14,10 +14,14 @@ export async function mixStylesheet(fastify, _options, done) {
 
     const styleHandler = async (_request, reply) => {
         reply.type('text/css').send(mixStyle.css);
+    };
 
+    const styleSourceMapHandler = async (_request, reply) => {
+        reply.type('text/css').send(mixStyle.sourceMap);
     };
 
     fastify.get('/mix/styles.css', styleHandler);
+    fastify.get('/mix/styles.css.map', styleSourceMapHandler);
 
     done();
 }

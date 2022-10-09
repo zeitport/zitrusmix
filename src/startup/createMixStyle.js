@@ -9,24 +9,31 @@ export async function createMixStyle() {
 
     for await (const[name, style] of mixStyle.map) {
         const options = {
-            from: `/${name}.css`,
-            to: `/${name}.min.css`,
+            from: `/mix/elements/${name}.css`,
             map: {
                 absolute: false,
-                inline: false
+                inline: false,
+                annotations: false
             }
         };
 
         const result = await postcss(plugins(style.moduleId)).process(style.raw, options);
-        document.append(result.css);
+        document.append(result.root);
     }
 
-    mixStyle.css = document.toResult({
-        to: 'all.css', map: {
+    const documentResult = document.toResult({
+        from: '/mix/styles.css',
+        to: '/mix/styles.css',
+        map: {
             absolute: false,
-            inline: false
+            inline: false,
+            sourcesContent: true,
+            annotation: '/mix/styles.css.map'
         }
-    }).css;
+    });
+
+    mixStyle.css = documentResult.css;
+    mixStyle.sourceMap = documentResult.map.toString();
 }
 
 /**
@@ -41,6 +48,9 @@ function plugins(moduleId) {
     return [
         autoprefixer,
         nested,
-        modules({ generateScopedName })
+        modules({
+            generateScopedName,
+            getJSON: () => {}
+        })
     ];
 }

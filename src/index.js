@@ -1,6 +1,6 @@
 import Fastify from 'fastify';
 
-import { definePageRoute, definePageHead, router } from './router/router.js';
+import { definePageRoute, definePageHead, router, defineStaticRoot } from './router/router.js';
 import { Options } from './options.js';
 import { scanPages } from './startup/scanPages.js';
 import { scanElements } from './startup/scanElements.js';
@@ -45,9 +45,10 @@ export async function zitrusmix(init) {
     const module = await loadHeadModule(options);
     definePageHead(module.default);
 
+    // Define static root
+    defineStaticRoot(options);
 
     log.debug('Available page routes', {routes: pages.map(page => page.route.url)});
-
 
     fastify.register(router);
 

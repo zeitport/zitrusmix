@@ -1,4 +1,5 @@
 import { elements } from './state/elements.js';
+import { mixStyle } from './state/mixStyle.js';
 
 export const mixElements = {
     /**
@@ -7,5 +8,9 @@ export const mixElements = {
      */
     define(elementName, ElementConstructor) {
         elements.set(elementName, ElementConstructor);
+
+        if (ElementConstructor.styles) {
+            mixStyle.map.set(elementName, ElementConstructor.styles);
+        }
     }
 };

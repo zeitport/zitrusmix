@@ -13,5 +13,10 @@ export const mixStyle = {
     /**
      * @type {string}
      */
-    css: ''
+    css: '',
+
+    /**
+     * @type {string}
+     */
+    sourceMap: ''
 };

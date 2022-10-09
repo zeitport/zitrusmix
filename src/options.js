@@ -36,6 +36,11 @@ export class Options {
         /**
          * @type {string}
          */
+        this.staticRoot = partial?.staticRoot || './app/static/'
+
+        /**
+         * @type {string}
+         */
         this.head = partial?.head || './app/head.js';
 
         /**
