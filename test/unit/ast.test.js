@@ -1,7 +1,7 @@
 import * as parse5 from 'parse5';
 
 import { expect } from './sandbox.js';
-import { ast } from '../../src/utils/ast.js';
+import { ast } from '../../dist/utils/ast.js';
 
 describe('utils/ast', function() {
     describe('getAttribute()', function() {

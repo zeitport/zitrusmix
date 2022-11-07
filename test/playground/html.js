@@ -1,5 +1,5 @@
 import { mixElements, MixElement } from '../../src/index.js';
-import { html } from '../../src/html.js';
+import { html } from '../../src/tags/html.js';
 
 
 class ActorCard extends MixElement {

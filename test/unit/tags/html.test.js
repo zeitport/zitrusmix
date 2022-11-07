@@ -1,19 +1,17 @@
 /**
- * @typedef {import('../types/mixElement.js').ElementContext} ElementContext
+ * @typedef {import('../../../dist/tags/htmlTemplateResult.js').HtmlTemplateResult} HtmlTemplateResult
  */
 
-import { HtmlTemplateResult } from '../../../src/tags/htmlTemplateResult.js';
-import { renderMixElement } from '../../../src/tags/renderMixElement.js';
 import { css, expect, html, MixElement, mixElements } from '../sandbox.js';
 
 /**
  * A Mixin that creates a MixElement with a custom render function.
- * @param {function(ElementContext): HtmlTemplateResult} customRender
+ * @param {function(import('../../../src/interfaces/elementContext.js').ElementContext): HtmlTemplateResult} customRender
  * @returns
  */
 const MyElement = (customRender) => class extends MixElement {
     render(context) {
-        return customRender(context)
+        return customRender(context);
     }
 };
 
@@ -159,8 +157,8 @@ describe('html()', function () {
                 static styles = css`.hero-title { color: blue;}`;
                 render({ html }) {
                     return html`<h1 class="hero title">Hero</h1>`;
-                };
-            };
+                }
+            }
 
             // The module Id is readonly, but we can override it for unit testing.
             // @ts-ignore
@@ -182,15 +180,15 @@ describe('html()', function () {
                 static styles = css`.page { width: 800px; }`;
                 render({ html }) {
                     return html`<div class="page"><slot></slot></div>`;
-                };
-            };
+                }
+            }
 
             class MyHeader extends MixElement {
                 static styles = css`.header { color: blue;}`;
                 render({ html }) {
                     return html`<header class="header"><slot></slot></header>`;
-                };
-            };
+                }
+            }
 
             // The module Id is readonly, but we can override it for unit testing.
             // @ts-ignore

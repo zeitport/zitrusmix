@@ -1,4 +1,4 @@
-import { html } from 'zitrusmix';
+import { html } from '../../../src';
 
 export default function head() {
     return html`

@@ -19,7 +19,7 @@ import { log } from '../log.js';
  */
 export async function scanPages(options) {
     const files = await globby(options.pageFiles);
-    const pages = [];
+    const pages: Array<Page> = [];
 
     for (const file of files) {
         const fileContent = await fs.readFile(file, 'utf8');
@@ -46,7 +46,7 @@ export async function scanPages(options) {
  * @returns {Promise<PageRoute>}
  */
 async function getRoute(file, baseDir, document) {
-    let pageRoute = null;
+    let pageRoute: PageRoute;
 
     const metaNodes = ast.filter(document, node => node.nodeName === 'meta');
     const metaData = getMetaData(metaNodes);
@@ -60,7 +60,7 @@ async function getRoute(file, baseDir, document) {
             .replace('/index', '/')
             .replace(baseDir, '/')
             .replaceAll('//', '/');
-        pageRoute =new PageRoute({url: filebasedUrl, source: PageRouteSource.FILEPATH});
+        pageRoute = new PageRoute({url: filebasedUrl, source: PageRouteSource.FILEPATH});
     }
 
     return pageRoute;

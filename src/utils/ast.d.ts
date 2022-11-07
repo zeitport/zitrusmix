@@ -13,13 +13,9 @@ export interface Attribute {
     value: string;
 }
 
-export type DocumentFragment = DocumentFragment;
-export type Document = Document;
-export type Element = Element;
-export type ChildNode = ChildNode;
 export type ChildElement = ChildNode & Element;
 
-export type nodeCallbackFn = function(ChildNode): boolean;
-export type ElementCallbackFn = function(Element): boolean;
+export type nodeCallbackFn = (node: ChildNode) => boolean;
+export type ElementCallbackFn = (element: Element) => boolean;
 
-export type MaybeElement = Element | unknown | Record;
+export type MaybeElement = Element | unknown | Record<string, any>;

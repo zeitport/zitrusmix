@@ -4,26 +4,19 @@ import { Timeline } from '../utils/timeline.js';
 import { mergeHead } from '../utils/mergeHead.js';
 import { log } from '../../log.js';
 import { html } from '../../tags/html.js';
-
-/**
- * @typedef {import('../../startup/page').Page} Page
- * @typedef {import('../../tags/htmlTemplateResult').HtmlTemplateResult} HtmlTemplateResult
- */
-
+import { Page } from '../../startup/page.js';
+import { HtmlTemplateResult } from '../../tags/htmlTemplateResult.js';
+import { getErrorMessage } from '../../utils/getErrorMessage.js';
 
 export class RenderPagesOptions {
+    pages: Set<Page>;
+    head: () => HtmlTemplateResult;
+
     /**
      * @param {Required<RenderPagesOptions>} init
      */
     constructor(init) {
-        /**
-         * @type {Set<Page>}
-         */
         this.pages = init.pages;
-
-        /**
-         * @type {function(): HtmlTemplateResult}
-         */
         this.head = init.head;
     }
 }
@@ -59,7 +52,7 @@ export async function renderPages(fastify, options, done) {
                 reply.header('Server-Timing', timeline.getPerformanceServerTiming());
                 reply.type('text/html').send(renderedPage.text);
             } catch (error) {
-                const { message } = /** @type {Error} */(error);
+                const message = getErrorMessage(error);
                 log.error(`Render page "${request.url}" failed: ${message}`);
                 reply.status(500).send();
             }

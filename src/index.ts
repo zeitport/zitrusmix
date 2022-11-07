@@ -7,19 +7,15 @@ import { scanElements } from './startup/scanElements.js';
 import { loadHeadModule } from './startup/loadHeadModule.js';
 import { log, useLogger } from './log.js';
 import { scanApi } from './startup/scanApi.js';
+import { createMixStyle } from './startup/createMixStyle.js';
 
 export { css, html } from './tags/tags.js';
 export { MixElement } from './mixElement.js';
-export { mixElements } from './mixElements.js';
-import { createMixStyle } from './startup/createMixStyle.js';
+export * from './mixElements.js';
 
 const fastify = Fastify();
 
-/**
- * @param {Partial<Options>} [init]
- * @returns
- */
-export async function zitrusmix(init) {
+export async function zitrusmix(init: Partial<Options>): Promise<void> {
     const options = new Options(init);
 
     // Use custom logger
@@ -51,20 +47,12 @@ export async function zitrusmix(init) {
     log.debug('Available page routes', {routes: pages.map(page => page.route.url)});
 
     fastify.register(router);
+    fastify.listen({port: options.port}, function (error, address) {
+        if (error) {
+            log.fatal(error.message);
+        }
 
-    // #TODO: Add type definition
-    return {
-        options,
-        fastify,
-        log,
-        listen
-    };
-}
-
-/**
- * @param {import('fastify/types/instance.js').FastifyListenOptions} options
- * @param {(err: Error | null, address: string) => void} callback
- */
-function listen(options, callback) {
-    fastify.listen(options, callback);
+        log.info(new Date().toLocaleTimeString());
+        log.info(`Server is now listening on ${address}`);
+    });
 }

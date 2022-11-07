@@ -2,10 +2,11 @@
     "name": "zitrusmix",
     "version": "0.21.0",
     "description": "",
-    "main": "src/index.js",
     "type": "module",
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
     "files": [
-        "src",
+        "dist",
         "README.md",
         "LICENSE"
     ],

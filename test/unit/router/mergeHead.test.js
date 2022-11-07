@@ -1,5 +1,5 @@
 import { expect } from '../sandbox.js';
-import { mergeHead } from '../../../src/router/utils/mergeHead.js';
+import { mergeHead } from '../../../dist/router/utils/mergeHead.js';
 import * as parse5 from 'parse5';
 
 describe('mergeHead()', function () {

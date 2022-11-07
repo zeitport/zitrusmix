@@ -24,12 +24,11 @@
         "allowSyntheticDefaultImports": true,
         "experimentalDecorators": true,
         "forceConsistentCasingInFileNames": true,
-        "useDefineForClassFields": false,
-        "skipLibCheck": true,
+        "useDefineForClassFields": true,
+        "skipLibCheck": false,
     },
     "include": [
-        "./app/**/*.js",
-        "./app/**/*.ts"
+        "./app/**/*.js"
     ],
     "exclude": [
         "node_modules",

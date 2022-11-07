@@ -1,58 +1,51 @@
+import { BaseLogger } from './log/baseLogger.js';
 import { PrettyConsoleLogger } from './log/prettyConsoleLogger.js';
+import { Nullable } from './utils/nullable.js';
 
-/**
- * @typedef {import('../types/baseLogger.js').BaseLogger} BaseLogger
- */
 
-/**
- * @type {BaseLogger | null}
- */
-let baseLogger = null;
+let baseLogger: Nullable<BaseLogger> = null;
 
-/**
- * @param {BaseLogger | null} logger
- */
-export function useLogger(logger) {
+export function useLogger(logger: Nullable<BaseLogger>) {
     baseLogger = logger || new PrettyConsoleLogger();
 }
 
 const log = {
     /**
      * @param {string} message
-     * @param {object} [data]
+     * @param {object} data
      * @returns void
      */
-    debug: (message, data) => {
+    debug: (message, data?): void => {
         const entry = { msg: message, level: 'debug', ...data };
         baseLogger?.debug?.(entry);
     },
 
     /**
      * @param {string} message
-     * @param {object} [data]
+     * @param {object} data
      * @returns void
      */
-    info: (message, data) => {
+    info: (message, data?): void => {
         const entry = { msg: message, level: 'info', ...data };
         baseLogger?.info?.(entry);
     },
 
     /**
      * @param {string} message
-     * @param {object} [data]
+     * @param {object} data
      * @returns void
      */
-    warn: (message, data) => {
+    warn: (message, data?) => {
         const entry = { msg: message, level: 'warn', ...data };
         baseLogger?.warn?.(entry);
     },
 
     /**
      * @param {string} message
-     * @param {object} [data]
+     * @param {object} data
      * @returns void
      */
-    error: (message, data) => {
+    error: (message, data?) => {
         const entry = { msg: message, level: 'error', ...data };
         baseLogger?.error?.(entry);
 
@@ -63,10 +56,10 @@ const log = {
 
     /**
      * @param {string} message
-     * @param {object} [data]
+     * @param {object} data
      * @returns void
      */
-    fatal: (message, data) => {
+    fatal: (message, data?) => {
         const entry = { msg: message, level: 'fatal', ...data };
         baseLogger?.fatal?.(entry);
 

@@ -1,7 +1,7 @@
-import { MixElement, css, mixElements } from 'zitrusmix';
+import { MixElement, html, mixElements } from '../../../../src';
 
 class PageLayout extends MixElement {
-    static styles = css`
+    static styles = html`
         .page {
             font-size: 1rem;
         }

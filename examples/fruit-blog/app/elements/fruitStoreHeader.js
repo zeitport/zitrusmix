@@ -1,12 +1,8 @@
 import { MixElement, css, mixElements } from 'zitrusmix';
 
 class FruitStoreHeader extends MixElement {
-    constructor() {
-        super();
-    }
-
     static styles = css`
-        .fsh-headline {
+        .headline {
             font-size: 3rem;
             color: #808030;
         }
@@ -15,7 +11,7 @@ class FruitStoreHeader extends MixElement {
     render({html}) {
         return html`
             <header>
-                <h1 class="fsh-headline">🍋 Zitrusmix Fruit Store</h1>
+                <h1 class="headline">🍋 Zitrusmix Fruit Store</h1>
             </header>
         `;
     }

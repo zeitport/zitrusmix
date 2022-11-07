@@ -1,12 +1,7 @@
 import { performance} from 'node:perf_hooks';
 
 export class Timeline {
-    constructor() {
-        /**
-         * @type {TimelineMark[]}
-         */
-        this.marks = [];
-    }
+    readonly marks: TimelineMark[] = [];
 
     /**
      * @param {string} name
@@ -22,7 +17,7 @@ export class Timeline {
     getPerformanceServerTiming() {
         this.mark('getPerformanceServerTiming');
 
-        const timings = [];
+        const timings: string[] = [];
 
         for(let i = 0; i < this.marks.length - 1; i++) {
             const mark = this.marks[i];
@@ -35,20 +30,11 @@ export class Timeline {
 }
 
 class TimelineMark {
-    /**
-     * @param {Required<TimelineMark>} init
-     */
-    constructor(init) {
-        /**
-         * @type {string}
-         * @readonly
-         */
-        this.name = init.name;
+    readonly name: string;
+    readonly time: number;
 
-        /**
-         * @type {number}
-         * @readonly
-         */
+    constructor(init: Required<TimelineMark>) {
+        this.name = init.name;
         this.time = init.time;
     }
 }

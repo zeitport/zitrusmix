@@ -1,4 +1,4 @@
-import { expect, css, mixElements} from '../sandbox.js';
+import { expect, css} from '../sandbox.js';
 
 describe('css()', function () {
     describe('moduleId', function () {
