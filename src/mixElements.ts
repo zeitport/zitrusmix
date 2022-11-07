@@ -1,16 +1,14 @@
+import type { ElementName } from './elmentName.js';
+import type { MixElementConstructor } from './interfaces/mixElementConstructor.js';
 import { elements } from './state/elements.js';
 import { mixStyle } from './state/mixStyle.js';
 
 export const mixElements = {
-    /**
-     * @param {import('../types/mixElement.js').ElementName} elementName
-     * @param {import('../types/mixElement.js').MixElementConstructor} ElementConstructor
-     */
-    define(elementName, ElementConstructor) {
-        elements.set(elementName, ElementConstructor);
+    define(elementName: ElementName, Constructor: MixElementConstructor) {
+        elements.set(elementName, Constructor);
 
-        if (ElementConstructor.styles) {
-            mixStyle.map.set(elementName, ElementConstructor.styles);
+        if (Constructor.styles) {
+            mixStyle.map.set(elementName, Constructor.styles);
         }
     }
 };

@@ -1,8 +1,3 @@
-/**
- * @typedef {import('../../types/mixElement.js').MixElementConstructor} MixElementConstructor
- */
+import type { MixElementConstructor } from '../interfaces/mixElementConstructor.js';
 
-/**
- * @type {Map<string, MixElementConstructor>}
- */
-export const elements = new Map();
+export const elements: Map<string, MixElementConstructor> = new Map();

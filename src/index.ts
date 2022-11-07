@@ -10,8 +10,11 @@ import { scanApi } from './startup/scanApi.js';
 import { createMixStyle } from './startup/createMixStyle.js';
 
 export { css, html } from './tags/tags.js';
-export { MixElement } from './mixElement.js';
+export * from './mixElement.js';
 export * from './mixElements.js';
+export * from './interfaces/mixElementConstructor.js';
+export * from './interfaces/elementContext.js';
+export * from './tags/htmlTemplateResult.js';
 
 const fastify = Fastify();
 

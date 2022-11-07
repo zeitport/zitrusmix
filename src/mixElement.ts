@@ -2,10 +2,12 @@ import { ElementContext } from './interfaces/elementContext';
 import {CssTemplateResult} from './tags/cssTemplateResult';
 import { HtmlTemplateResult } from './tags/htmlTemplateResult';
 
-export class MixElement {
+export abstract class MixElement {
     static styles: CssTemplateResult | undefined = undefined;
 
-    render(_renderContext: ElementContext): HtmlTemplateResult {
-        throw new Error('Not implemented!');
-    }
+    abstract render(context: ElementContext): HtmlTemplateResult;
+}
+
+export interface MixElementRenderMethod {
+    render(context: ElementContext): HtmlTemplateResult;
 }

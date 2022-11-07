@@ -1,10 +1,5 @@
-/**
- * @typedef {import('../../types/ast.js').Node} Node
- * @typedef {import('../../types/ast.js').Element} Element
- * @typedef {import('../../types/ast.js').nodeCallbackFn} nodeCallbackFn
- * @typedef {import('../../types/ast.js').ElementCallbackFn} ElementCallbackFn
- * @typedef {import('../../types/ast.js').ChildNode} ChildNode
- */
+import type {Element, ChildNode} from 'parse5/dist/tree-adapters/default';
+
 
 /**
  * @type {nodeCallbackFn}
@@ -137,3 +132,22 @@ export const ast = {
     filter,
     find
 };
+
+export interface Node {
+    tagName?: string;
+    nodeName?: string;
+    childNodes?: Array<Node>;
+    attrs?: Array<Attribute>;
+}
+
+export interface Attribute {
+    name: string;
+    value: string;
+}
+
+export type ChildElement = ChildNode & Element;
+
+export type nodeCallbackFn = (node: ChildNode) => boolean;
+export type ElementCallbackFn = (element: Element) => boolean;
+
+export type MaybeElement = Element | unknown | Record<string, any>;

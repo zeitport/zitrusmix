@@ -8,6 +8,10 @@ class FruitStoreHeader extends MixElement {
         }
     `;
 
+    /**
+     * @param {import('zitrusmix').ElementContext} context
+     * @returns {import('zitrusmix').HtmlTemplateResult}
+     */
     render({html}) {
         return html`
             <header>
