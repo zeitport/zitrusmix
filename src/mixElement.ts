@@ -1,6 +1,6 @@
-import { ElementContext } from './interfaces/elementContext';
-import {CssTemplateResult} from './tags/cssTemplateResult';
-import { HtmlTemplateResult } from './tags/htmlTemplateResult';
+import { ElementContext } from './interfaces/elementContext.js';
+import {CssTemplateResult} from './tags/cssTemplateResult.js';
+import { HtmlTemplateResult } from './tags/htmlTemplateResult.js';
 
 export abstract class MixElement {
     static styles: CssTemplateResult | undefined = undefined;

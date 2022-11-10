@@ -1,6 +1,4 @@
-/**
- * @typedef {import('../options.js').Options} Options
- */
+/* eslint-disable @typescript-eslint/no-empty-function */
 
 /**
  * #TODO: Add api support
@@ -8,5 +6,4 @@
  * @returns {Promise<void>}
  */
 export async function scanApi(_options) {
-
 }

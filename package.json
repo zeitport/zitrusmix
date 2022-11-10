@@ -13,7 +13,7 @@
     "scripts": {
         "compile": "tsc",
         "test": "vitest --dir ./test/unit",
-        "test:watch": "nodemon --exec \"npm test\"",
+        "test:watch": "vitest watch --dir ./test/unit",
         "lint": "eslint ./src/**/*.ts ./test/**/*.ts",
         "fix": "eslint ./src/**/*.ts ./test/**/*.ts --fix --cache",
         "tool:createErrorId": "node ./tools/createErrorId.js"

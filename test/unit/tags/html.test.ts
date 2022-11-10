@@ -1,5 +1,10 @@
 import { assert, describe, it } from 'vitest';
 import { css, html, MixElement, mixElements } from '../sandbox.js';
+import {useCustomIdGenerator}   from '../../../src/utils/createId.js';
+import {formatHtml} from '../../../src/utils/formatHtml.js';
+
+const staticId = 'e54enyb6';
+useCustomIdGenerator(() => staticId);
 
 /**
  * A Mixin that creates a MixElement with a custom render function.
@@ -22,7 +27,7 @@ describe('html()', function () {
             const result = html`<h1>Hello ${name}!</h1>`;
 
             // Then
-            expect(result.text).to.equal('<h1>Hello World!</h1>');
+            assert.deepEqual(result.text, '<h1>Hello World!</h1>');
         });
     });
 
@@ -153,21 +158,17 @@ describe('html()', function () {
             class MyElement extends MixElement {
                 static styles = css`.hero-title { color: blue;}`;
                 render({ html }) {
-                    return html`<h1 class="hero title">Hero</h1>`;
+                    return html`<h1 class="hero-title">Hero</h1>`;
                 }
             }
-
-            // The module Id is readonly, but we can override it for unit testing.
-            // @ts-ignore
-            MyElement.styles.moduleId = 'e54enyb6';
-
             mixElements.define('my-element', MyElement);
 
             // When
-            const result = html`<my-element><h1 class="hero-title">Hero</h1></my-element>`;
+            const result = html`<my-element></my-element>`;
 
             // Then
-            assert.deepEqual(result.text, '<my-element><h1 class="hero-e54enyb6 title-e54enyb6">Hero</h1></my-element>');
+            const expectedHtml = `<my-element><h1 class="hero-title-${MyElement.styles.moduleId}">Hero</h1></my-element>`;
+            assert.deepEqual(result.text, expectedHtml);
         });
 
 
@@ -187,20 +188,31 @@ describe('html()', function () {
                 }
             }
 
-            // The module Id is readonly, but we can override it for unit testing.
-            // @ts-ignore
-            MyPage.styles.moduleId = 'page4200';
-            // @ts-ignore
-            MyHeader.styles.moduleId = 'head7300';
-
             mixElements.define('my-page', MyPage);
             mixElements.define('my-header', MyHeader);
 
             // When
-            const result = html`<my-page><my-header><h1>Hero</h1></my-header></my-page>`;
+            const result = html`
+                <my-page>
+                    <my-header>
+                        <h1>Hero</h1>
+                    </my-header>
+                </my-page>
+            `;
 
             // Then
-            assert.deepEqual(result.text, '<my-page><div class="page-page4200"><my-header><header class="header-head7300"><h1>Hero</h1></header></my-header></div></my-page>');
+            const expectedHtml = `
+                <my-page>
+                    <div class="page-${MyPage.styles.moduleId}">
+                        <my-header>
+                            <header class="header-${MyHeader.styles.moduleId}">
+                                <h1>Hero</h1>
+                            </header>
+                        </my-header>
+                    </div>
+                </my-page>
+            `;
+            assert.deepEqual(formatHtml(result.text), formatHtml(expectedHtml));
         });
     });
 });

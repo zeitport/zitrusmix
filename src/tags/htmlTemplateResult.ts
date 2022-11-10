@@ -1,5 +1,5 @@
 import { defaultTreeAdapter } from 'parse5';
-import { DocumentFragment } from 'parse5/dist/tree-adapters/default';
+import { DocumentFragment } from 'parse5/dist/tree-adapters/default.js';
 
 /**
  * Use the html (./html.js) tagged template literal to create a HtmlTemplateResult.

@@ -50,6 +50,8 @@ function plugins(moduleId) {
         nested,
         modules({
             generateScopedName,
+
+            // eslint-disable-next-line @typescript-eslint/no-empty-function
             getJSON: () => {}
         })
     ];

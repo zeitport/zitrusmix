@@ -1,4 +1,4 @@
-import type {Element, ChildNode} from 'parse5/dist/tree-adapters/default';
+import type {Element, ChildNode} from 'parse5/dist/tree-adapters/default.js';
 
 
 /**
@@ -149,5 +149,3 @@ export type ChildElement = ChildNode & Element;
 
 export type nodeCallbackFn = (node: ChildNode) => boolean;
 export type ElementCallbackFn = (element: Element) => boolean;
-
-export type MaybeElement = Element | unknown | Record<string, any>;
