@@ -1,6 +1,7 @@
-import { expect } from '../sandbox.js';
-import { mergeHead } from '../../../dist/router/utils/mergeHead.js';
+import { assert, describe, it } from 'vitest';
 import * as parse5 from 'parse5';
+
+import { mergeHead } from '../../../dist/router/utils/mergeHead.js';
 
 describe('mergeHead()', function () {
     it('merges meta tags', function () {
@@ -23,7 +24,7 @@ describe('mergeHead()', function () {
             </body>
             </html>
         `;
-        expect(actual).to.equal(expected);
+        assert.deepEqual(actual, expected);
     });
 
     it('merges only tags', function () {
@@ -46,7 +47,7 @@ describe('mergeHead()', function () {
             </body>
             </html>
         `;
-        expect(actual).to.equal(expected);
+        assert.deepEqual(actual, expected);
     });
 
     it('use the document title tag', function() {
@@ -68,7 +69,7 @@ describe('mergeHead()', function () {
             </body>
             </html>
         `;
-        expect(actual).to.equal(expected);
+        assert.deepEqual(actual, expected);
     });
 
     it('use the document meta tag', function() {
@@ -90,7 +91,7 @@ describe('mergeHead()', function () {
             </body>
             </html>
         `;
-        expect(actual).to.equal(expected);
+        assert.deepEqual(actual, expected);
     });
 });
 

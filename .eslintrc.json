@@ -1,14 +1,19 @@
 {
+    "root": true,
+    "parser": "@typescript-eslint/parser",
     "env": {
         "browser": true,
         "es2021": true
     },
     "plugins": [
+        "@typescript-eslint",
         "jsdoc"
     ],
     "extends": [
         "eslint:recommended",
-        "plugin:node/recommended"
+        "plugin:node/recommended",
+        "plugin:@typescript-eslint/eslint-recommended",
+        "plugin:@typescript-eslint/recommended"
     ],
     "overrides": [{
         "files": ["*.json"],
@@ -31,6 +36,7 @@
         "node/no-unsupported-features/es-syntax": "off",
         "node/no-path-concat": "error",
         "node/no-process-env": "error",
+        "node/no-missing-import": "off",
         "jsdoc/require-returns": "error",
         "jsdoc/require-param": "error",
         "indent": [

@@ -1,4 +1,4 @@
-import { PageRoute } from "./pageRoute";
+import { PageRoute } from './pageRoute';
 
 export class Page {
     readonly filepath: string;

@@ -1,4 +1,5 @@
-import { expect, css} from '../sandbox.js';
+import { assert, describe, it } from 'vitest';
+import { css} from '../sandbox.js';
 
 describe('css()', function () {
     describe('moduleId', function () {
@@ -7,8 +8,8 @@ describe('css()', function () {
             const result = css`.headliner { color: blue};`;
 
             // Then
-            expect(result.moduleId).not.to.equal(null);
-            expect(result.moduleId).not.to.equal(undefined);
+            assert.notDeepEqual(result.moduleId, null);
+            assert.notDeepEqual(result.moduleId, undefined);
         });
     });
 });

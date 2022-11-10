@@ -11,4 +11,4 @@ export class PageRoute {
 export enum PageRouteSource {
     META_TAG = 'metaTag',
     FILEPATH = 'filepath'
-};
+}

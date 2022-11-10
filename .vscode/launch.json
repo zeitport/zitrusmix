@@ -7,14 +7,19 @@
         {
             "type": "node",
             "request": "launch",
-            "name": "Launch Program",
+            "name": "Mocha Tests",
             "skipFiles": [
                 "<node_internals>/**"
             ],
-            "program": "${workspaceFolder}\\src\\index.js",
-            "outFiles": [
-                "${workspaceFolder}/**/*.js"
-            ]
+            "program": "${workspaceFolder}/node_modules/mocha/bin/_mocha",
+            "args": [
+                "--require", "ts-node/register",
+                "-u", "tdd",
+                "--timeout", "999999",
+                "--colors", "--recursive",
+                "${workspaceFolder}/test/unit/**/*.test.ts"
+            ],
+            "internalConsoleOptions": "openOnSessionStart"
         }
     ]
 }

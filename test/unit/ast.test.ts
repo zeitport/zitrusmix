@@ -1,7 +1,7 @@
+import { assert, describe, it } from 'vitest';
 import * as parse5 from 'parse5';
 
-import { expect } from './sandbox.js';
-import { ast } from '../../dist/utils/ast.js';
+import { ast } from '../../src/utils/ast.js';
 
 describe('utils/ast', function() {
     describe('getAttribute()', function() {
@@ -13,7 +13,7 @@ describe('utils/ast', function() {
             const id = ast.getAttribute(node, 'id');
 
             // Then
-            expect(id).to.equal('42');
+            assert.equal(id, '42');
         });
     });
 
@@ -23,7 +23,7 @@ describe('utils/ast', function() {
             const fragement = parse5.parseFragment(`
                 <ul id="list">
                     <li><a href="/home"></a></li>
-                    <li><a href="/abaout"></a></li>
+                    <li><a href="/about"></a></li>
                 </ul>`
             );
 
@@ -33,8 +33,8 @@ describe('utils/ast', function() {
 
             // Then
             const actualLinks = [...result].map(node => node.attrs[0].value);
-            const expectedLinks = ['/home', '/abaout'];
-            expect(actualLinks).to.deep.equal(expectedLinks);
+            const expectedLinks = ['/home', '/about'];
+            assert.deepEqual(actualLinks, expectedLinks);
         });
 
         it('returns selected nodes excluding custom element childs', function() {
@@ -43,7 +43,7 @@ describe('utils/ast', function() {
                 <a href="/">Logo</a>
                 <my-nav>
                     <li><a href="/home"></a></li>
-                    <li><a href="/abaout"></a></li>
+                    <li><a href="/about"></a></li>
                 </my-nav>`
             );
 
@@ -55,7 +55,7 @@ describe('utils/ast', function() {
             // Then
             const actualLinks = [...result].map(node => node.attrs[0].value);
             const expectedLinks = ['/'];
-            expect(actualLinks).to.deep.equal(expectedLinks);
+            assert.deepEqual(actualLinks, expectedLinks);
         });
     });
 });

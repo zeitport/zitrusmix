@@ -6,7 +6,7 @@
             "ES2021.String"
         ],
         "target": "ES2022",
-        "types": [],
+        "types": ["fastify"],
         "allowJs": true,
         "noImplicitAny": false,
         "checkJs": true,
@@ -27,6 +27,7 @@
         "forceConsistentCasingInFileNames": true,
         "useDefineForClassFields": false,
         "skipLibCheck": true,
+
     },
     "include": [
         "./src/**/*.js",
@@ -36,5 +37,8 @@
         "node_modules",
         "./node_modules",
         "./node_modules/*",
-    ]
+    ],
+    "ts-node": {
+        "skipIgnore": true
+    }
 }

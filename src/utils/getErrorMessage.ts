@@ -8,7 +8,7 @@ function isErrorWithMessage(error: unknown): error is ErrorWithMessage {
         error !== null &&
         'message' in error &&
         typeof (error as Record<string, unknown>).message === 'string'
-    )
+    );
 }
 
 function toErrorWithMessage(maybeError: unknown): ErrorWithMessage {
@@ -18,9 +18,9 @@ function toErrorWithMessage(maybeError: unknown): ErrorWithMessage {
         errorWithMessage = maybeError;
     } else {
         try {
-            errorWithMessage = new Error(JSON.stringify(maybeError))
+            errorWithMessage = new Error(JSON.stringify(maybeError));
         } catch {
-            errorWithMessage = new Error(String(maybeError))
+            errorWithMessage = new Error(String(maybeError));
         }
     }
 
@@ -28,5 +28,5 @@ function toErrorWithMessage(maybeError: unknown): ErrorWithMessage {
 }
 
 export function getErrorMessage(error: unknown) {
-    return toErrorWithMessage(error).message
+    return toErrorWithMessage(error).message;
 }

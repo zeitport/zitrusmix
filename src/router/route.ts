@@ -1,4 +1,4 @@
-import { RouteHandler } from "fastify";
+import { RouteHandler } from 'fastify';
 
 export class Route {
     readonly url: string;
@@ -20,4 +20,4 @@ export enum RouteMethod {
     HEAD = 'head',
     PUT = 'put',
     DELETE = 'delete'
-};
+}

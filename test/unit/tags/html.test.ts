@@ -1,8 +1,5 @@
-/**
- * @typedef {import('../../../dist/tags/htmlTemplateResult.js').HtmlTemplateResult} HtmlTemplateResult
- */
-
-import { css, expect, html, MixElement, mixElements } from '../sandbox.js';
+import { assert, describe, it } from 'vitest';
+import { css, html, MixElement, mixElements } from '../sandbox.js';
 
 /**
  * A Mixin that creates a MixElement with a custom render function.
@@ -39,7 +36,7 @@ describe('html()', function () {
             const result = html`<my-element></my-element>`;
 
             // Then
-            expect(result.text).to.equal('<my-element><h1>Hello World!</h1></my-element>');
+            assert.deepEqual(result.text, '<my-element><h1>Hello World!</h1></my-element>');
         });
 
         it('renders element inside <p>', function () {
@@ -51,7 +48,7 @@ describe('html()', function () {
             const result = html`<p><my-element></my-element></p>`;
 
             // Then
-            expect(result.text).to.equal('<p><my-element><ul>Hello World!</ul></my-element></p>');
+            assert.deepEqual(result.text, '<p><my-element><ul>Hello World!</ul></my-element></p>');
         });
 
         it('renders element with attributes', function () {
@@ -63,7 +60,7 @@ describe('html()', function () {
             const result = html`<my-element name="World"></my-element>`;
 
             // Then
-            expect(result.text).to.equal('<my-element name="World"><h1>Hello World!</h1></my-element>');
+            assert.deepEqual(result.text, '<my-element name="World"><h1>Hello World!</h1></my-element>');
         });
 
         it('renders nested custom elements', function () {
@@ -78,7 +75,7 @@ describe('html()', function () {
             const result = html`<my-page></my-page>`;
 
             // Then
-            expect(result.text).to.equal('<my-page><my-headline><h1>Hello World!</h1></my-headline></my-page>');
+            assert.deepEqual(result.text, '<my-page><my-headline><h1>Hello World!</h1></my-headline></my-page>');
         });
     });
 
@@ -92,7 +89,7 @@ describe('html()', function () {
             const result = html`<my-element>Some text</my-element>`;
 
             // Then
-            expect(result.text).to.equal('<my-element><h1>Hello!</h1><p>Some text</p></my-element>');
+            assert.deepEqual(result.text, '<my-element><h1>Hello!</h1><p>Some text</p></my-element>');
         });
 
         it('renders multiple slots', function () {
@@ -107,7 +104,7 @@ describe('html()', function () {
             const result = html`<my-header>Title</my-header><my-body>Content</my-body>`;
 
             // Then
-            expect(result.text).to.equal('<my-header><h1>Title</h1></my-header><my-body><section>Content</section></my-body>');
+            assert.deepEqual(result.text, '<my-header><h1>Title</h1></my-header><my-body><section>Content</section></my-body>');
         });
 
         it('renders multiple nested slots', function () {
@@ -122,7 +119,7 @@ describe('html()', function () {
             const result = html`<my-page>Title</my-page>`;
 
             // Then
-            expect(result.text).to.equal('<my-page><my-header><h1>Title</h1></my-header></my-page>');
+            assert.deepEqual(result.text, '<my-page><my-header><h1>Title</h1></my-header></my-page>');
         });
 
         it('renders a named slot', function () {
@@ -134,7 +131,7 @@ describe('html()', function () {
             const result = html`<my-page><h1 slot="title">Hello</h1><p>Some text</p></my-page>`;
 
             // Then
-            expect(result.text).to.equal('<my-page><header><h1>Hello</h1></header></my-page>');
+            assert.deepEqual(result.text, '<my-page><header><h1>Hello</h1></header></my-page>');
         });
 
         it('renders a named slot and a slot', function () {
@@ -146,7 +143,7 @@ describe('html()', function () {
             const result = html`<my-page><h1 slot="title">Fruits</h1><p>Lemon</p></my-page>`;
 
             // Then
-            expect(result.text).to.equal('<my-page><header><h1>Fruits</h1></header><p>Lemon</p></my-page>');
+            assert.deepEqual(result.text, '<my-page><header><h1>Fruits</h1></header><p>Lemon</p></my-page>');
         });
     });
 
@@ -170,7 +167,7 @@ describe('html()', function () {
             const result = html`<my-element><h1 class="hero-title">Hero</h1></my-element>`;
 
             // Then
-            expect(result.text).to.equal('<my-element><h1 class="hero-e54enyb6 title-e54enyb6">Hero</h1></my-element>');
+            assert.deepEqual(result.text, '<my-element><h1 class="hero-e54enyb6 title-e54enyb6">Hero</h1></my-element>');
         });
 
 
@@ -203,7 +200,7 @@ describe('html()', function () {
             const result = html`<my-page><my-header><h1>Hero</h1></my-header></my-page>`;
 
             // Then
-            expect(result.text).to.equal('<my-page><div class="page-page4200"><my-header><header class="header-head7300"><h1>Hero</h1></header></my-header></div></my-page>');
+            assert.deepEqual(result.text, '<my-page><div class="page-page4200"><my-header><header class="header-head7300"><h1>Hero</h1></header></my-header></div></my-page>');
         });
     });
 });

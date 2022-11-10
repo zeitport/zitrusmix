@@ -1,5 +1,5 @@
-import type { BaseLogger } from "./log/baseLogger.js";
-import type { Nullable } from "./utils/nullable.js";
+import type { BaseLogger } from './log/baseLogger.js';
+import type { Nullable } from './utils/nullable.js';
 
 export class Options {
     /**
