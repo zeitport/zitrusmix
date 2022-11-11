@@ -1,7 +1,7 @@
 import { assert, describe, it } from 'vitest';
 import * as parse5 from 'parse5';
 
-import { mergeHead } from '../../../dist/router/utils/mergeHead.js';
+import { mergeHead } from '../../../src/router/utils/mergeHead.js';
 
 describe('mergeHead()', function () {
     it('merges meta tags', function () {
