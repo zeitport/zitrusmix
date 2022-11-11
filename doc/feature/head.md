@@ -10,7 +10,7 @@
 <head>
     <meta name="description" content="Vida - The best fruit blogger from Italy.">
     <meta name="zitrusmix.route" content="/about-me" />
-    <title>About me</title>
+    <title>Vida - About me</title>
 </head>
 ```
 
