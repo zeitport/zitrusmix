@@ -1,6 +1,6 @@
 {
     "name": "zitrusmix",
-    "version": "0.21.0-alph",
+    "version": "1.0.0-alpha.0",
     "description": "",
     "type": "module",
     "main": "dist/index.js",
