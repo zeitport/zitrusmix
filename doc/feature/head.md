@@ -29,3 +29,6 @@ The path for a page is determined by this priority:
 - meta `zitrusmix.route` (e.g.: /about-me)
 - filepath (e.g.: ./app/pages/about.html) 
 
+
+## Possible problems
+- [_ZM-1173_: head.js not found](../help/ZM-1173.md)
