@@ -5,16 +5,21 @@ export class Options {
     /**
      * @description Current working directory
      */
-    cwd: string;
-    app: string | readonly string[];
-    pageFiles: string | readonly string[];
-    elementFiles: string | readonly string[];
-    pageRoot: string;
-    appRoot: string;
-    staticRoot: string;
-    head: string;
-    logger: Nullable<BaseLogger>;
-    port: number;
+    readonly cwd: string;
+    readonly app: string | readonly string[];
+    readonly pageFiles: string | readonly string[];
+    readonly elementFiles: string | readonly string[];
+    readonly pageRoot: string;
+    readonly appRoot: string;
+    readonly staticRoot: string;
+
+    /**
+     * @link https://github.com/zeitport/zitrusmix/blob/main/doc/feature/head.md
+     */
+    readonly head: string;
+
+    readonly logger: Nullable<BaseLogger>;
+    readonly port: number;
 
     /**
      * @param {Partial<Options> | undefined | null} [partial]
