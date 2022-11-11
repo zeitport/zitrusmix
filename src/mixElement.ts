@@ -4,13 +4,29 @@ import {CssTemplateResult} from './tags/cssTemplateResult.js';
 import { html } from './tags/html.js';
 import { HtmlTemplateResult } from './tags/htmlTemplateResult.js';
 
-export class MixElement {
-    static styles: CssTemplateResult | undefined = undefined;
-    readonly css = css;
+export interface StylesContext {
+    css: typeof css
+}
 
-    render(_context: ElementContext): HtmlTemplateResult {
+export abstract class MixElement {
+    static styles: CssTemplateResult = css``;
+
+    render(): HtmlTemplateResult {
         return html``;
     }
+
+    /**
+     * ### 💡 Warning
+     * Only override the `static` method `styles`.
+     *
+     * @deprecated
+     * @example
+     * static styles({css}) {
+     *   return css`.okay { color: green; };`;
+     * };
+     */
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
+    protected styles() {}
 }
 
 export interface MixElementRenderMethod {

@@ -1,0 +1,39 @@
+{
+    "compilerOptions": {
+        "module": "esnext",
+        "lib": [
+            "ES2022",
+            "ES2021.String"
+        ],
+        "target": "ES2022",
+        "types": ["fastify"],
+        "allowJs": true,
+        "noImplicitAny": false,
+        "checkJs": true,
+        "declaration": true,
+        "emitDeclarationOnly": false,
+        "noEmit": true,
+        "strict": true,
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
+        "noImplicitReturns": true,
+        "noFallthroughCasesInSwitch": true,
+        "moduleResolution": "node",
+        "isolatedModules": true,
+        "esModuleInterop": true,
+        "allowSyntheticDefaultImports": true,
+        "experimentalDecorators": true,
+        "forceConsistentCasingInFileNames": true,
+        "useDefineForClassFields": false,
+        "skipLibCheck": true,
+
+    },
+    "include": [
+        "./**/*.ts"
+    ],
+    "exclude": [
+        "node_modules",
+        "./node_modules",
+        "./node_modules/*",
+    ]
+}

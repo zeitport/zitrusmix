@@ -1,7 +1,7 @@
 import { MixElement, css, mixElements } from 'zitrusmix';
 
 class FruitStoreHeader extends MixElement {
-    static styles = super.css`
+    styles = css`
         .headline {
             font-size: 3rem;
             color: #808030;

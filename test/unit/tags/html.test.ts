@@ -6,17 +6,6 @@ import {formatHtml} from '../../../src/utils/formatHtml.js';
 const staticId = 'e54enyb6';
 useCustomIdGenerator(() => staticId);
 
-/**
- * A Mixin that creates a MixElement with a custom render function.
- * @param {function(import('../../../src/interfaces/elementContext.js').ElementContext): HtmlTemplateResult} customRender
- * @returns
- */
-const MyElement = (customRender) => class extends MixElement {
-    render(context) {
-        return customRender(context);
-    }
-};
-
 describe('html()', function () {
     describe('expressions', function () {
         it('returns evaluated expression', function () {
@@ -34,8 +23,12 @@ describe('html()', function () {
     describe('custom element', function () {
         it('renders element', function () {
             // Given
-            const render = ({ html }) => html`<h1>Hello World!</h1>`;
-            mixElements.define('my-element', MyElement(render));
+            class MyElement extends MixElement {
+                render() {
+                    return html`<h1>Hello World!</h1>`;
+                }
+            }
+            mixElements.define('my-element', MyElement);
 
             // When
             const result = html`<my-element></my-element>`;
@@ -46,8 +39,12 @@ describe('html()', function () {
 
         it('renders element inside <p>', function () {
             // Given
-            const render = ({ html }) => html`<ul>Hello World!</ul>`;
-            mixElements.define('my-element', MyElement(render));
+            class MyElement extends MixElement {
+                render() {
+                    return html`<ul>Hello World!</ul>`;
+                }
+            }
+            mixElements.define('my-element', MyElement);
 
             // When
             const result = html`<p><my-element></my-element></p>`;
@@ -58,8 +55,13 @@ describe('html()', function () {
 
         it('renders element with attributes', function () {
             // Given
-            const render = ({ html, attrs }) => html`<h1>Hello ${attrs.name}!</h1>`;
-            mixElements.define('my-element', MyElement(render));
+            class MyElement extends MixElement {
+                name = '';
+                render() {
+                    return html`<h1>Hello ${this.name}!</h1>`;
+                }
+            }
+            mixElements.define('my-element', MyElement);
 
             // When
             const result = html`<my-element name="World"></my-element>`;
@@ -70,11 +72,20 @@ describe('html()', function () {
 
         it('renders nested custom elements', function () {
             // Given
-            const renderPage = ({ html }) => html`<my-headline></my-headline>`;
-            mixElements.define('my-page', MyElement(renderPage));
+            class MyPage extends MixElement {
+                render() {
+                    return html`<my-headline></my-headline>`;
+                }
+            }
 
-            const renderHeadline = ({ html }) => html`<h1>Hello World!</h1>`;
-            mixElements.define('my-headline', MyElement(renderHeadline));
+            class MyHeadline extends MixElement {
+                render() {
+                    return html`<h1>Hello World!</h1>`;
+                }
+            }
+
+            mixElements.define('my-page', MyPage);
+            mixElements.define('my-headline', MyHeadline);
 
             // When
             const result = html`<my-page></my-page>`;
@@ -87,8 +98,12 @@ describe('html()', function () {
     describe('slots', function () {
         it('renders a slot', function () {
             // Given
-            const render = ({ html }) => html`<h1>Hello!</h1><p><slot></slot></p>`;
-            mixElements.define('my-element', MyElement(render));
+            class MyElement extends MixElement {
+                render() {
+                    return html`<h1>Hello!</h1><p><slot></slot></p>`;
+                }
+            }
+            mixElements.define('my-element', MyElement);
 
             // When
             const result = html`<my-element>Some text</my-element>`;
@@ -99,26 +114,44 @@ describe('html()', function () {
 
         it('renders multiple slots', function () {
             // Given
-            const header = ({ html }) => html`<h1><slot></slot></h1>`;
-            mixElements.define('my-header', MyElement(header));
+            class MyHeader extends MixElement {
+                render() {
+                    return html`<h1><slot></slot></h1>`;
+                }
+            }
 
-            const body = ({ html }) => html`<section><slot></slot></section>`;
-            mixElements.define('my-body', MyElement(body));
+            class MyCard extends MixElement {
+                render() {
+                    return html`<section><slot></slot></section>`;
+                }
+            }
+
+            mixElements.define('my-header', MyHeader);
+            mixElements.define('my-card', MyCard);
 
             // When
-            const result = html`<my-header>Title</my-header><my-body>Content</my-body>`;
+            const result = html`<my-header>Title</my-header><my-card>Content</my-card>`;
 
             // Then
-            assert.deepEqual(result.text, '<my-header><h1>Title</h1></my-header><my-body><section>Content</section></my-body>');
+            assert.deepEqual(result.text, '<my-header><h1>Title</h1></my-header><my-card><section>Content</section></my-card>');
         });
 
         it('renders multiple nested slots', function () {
             // Given
-            const page = ({ html }) => html`<my-header><slot></slot></my-header>`;
-            mixElements.define('my-page', MyElement(page));
+            class MyPage extends MixElement {
+                render() {
+                    return html`<my-header><slot></slot></my-header>`;
+                }
+            }
 
-            const header = ({ html }) => html`<h1><slot></slot></h1>`;
-            mixElements.define('my-header', MyElement(header));
+            class MyHeader extends MixElement {
+                render() {
+                    return html`<h1><slot></slot></h1>`;
+                }
+            }
+
+            mixElements.define('my-page', MyPage);
+            mixElements.define('my-header', MyHeader);
 
             // When
             const result = html`<my-page>Title</my-page>`;
@@ -129,8 +162,12 @@ describe('html()', function () {
 
         it('renders a named slot', function () {
             // Given
-            const page = ({ html }) => html`<header><slot name="title"></slot></header>`;
-            mixElements.define('my-page', MyElement(page));
+            class MyPage extends MixElement {
+                render() {
+                    return html`<header><slot name="title"></slot></header>`;
+                }
+            }
+            mixElements.define('my-page', MyPage);
 
             // When
             const result = html`<my-page><h1 slot="title">Hello</h1><p>Some text</p></my-page>`;
@@ -141,8 +178,12 @@ describe('html()', function () {
 
         it('renders a named slot and a slot', function () {
             // Given
-            const page = ({ html }) => html`<header><slot name="title"></slot></header><slot></slot>`;
-            mixElements.define('my-page', MyElement(page));
+            class MyPage extends MixElement {
+                render() {
+                    return html`<header><slot name="title"></slot></header><slot></slot>`;
+                }
+            }
+            mixElements.define('my-page', MyPage);
 
             // When
             const result = html`<my-page><h1 slot="title">Fruits</h1><p>Lemon</p></my-page>`;
@@ -157,7 +198,7 @@ describe('html()', function () {
             // Given
             class MyElement extends MixElement {
                 static styles = css`.hero-title { color: blue;}`;
-                render({ html }) {
+                render() {
                     return html`<h1 class="hero-title">Hero</h1>`;
                 }
             }
@@ -176,14 +217,14 @@ describe('html()', function () {
             // Given
             class MyPage extends MixElement {
                 static styles = css`.page { width: 800px; }`;
-                render({ html }) {
+                render() {
                     return html`<div class="page"><slot></slot></div>`;
                 }
             }
 
             class MyHeader extends MixElement {
                 static styles = css`.header { color: blue;}`;
-                render({ html }) {
+                render() {
                     return html`<header class="header"><slot></slot></header>`;
                 }
             }

@@ -9,7 +9,7 @@ import { log } from '../log.js';
 import { elements } from '../state/elements.js';
 
 import { ast } from '../utils/ast.js';
-import { html } from './html.js';
+// import { html } from './html.js';
 
 /**
  * @param {Element} node
@@ -19,9 +19,12 @@ export function renderMixElement(node) {
 
     if (ElementConstructor) {
         const element = new ElementConstructor();
-        const attributes = node.attrs || [];
-        const attributeMap = Object.fromEntries(attributes.map(({ name, value }) => [name, value]));
-        const elementResult = element.render({ html, attrs: attributeMap, attributes});
+        // const attributes = node.attrs || [];
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        // const attributeMap = Object.fromEntries(attributes.map(({ name, value }) => [name, value]));
+
+        // #TODO: map attributes
+        const elementResult = element.render();
         const elementFragment = elementResult.fragment;
 
         // Use scopeds class names
