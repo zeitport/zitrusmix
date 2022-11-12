@@ -3,13 +3,13 @@ import { PrettyConsoleLogger } from './log/prettyConsoleLogger.js';
 import { Nullable } from './utils/nullable.js';
 
 
-let baseLogger: Nullable<BaseLogger> = null;
+let baseLogger: Nullable<BaseLogger> = new PrettyConsoleLogger();
 
 export function useLogger(logger: Nullable<BaseLogger>) {
-    baseLogger = logger || new PrettyConsoleLogger();
+    baseLogger = logger;
 }
 
-const log = {
+export const log = {
     /**
      * @param {string} message
      * @param {object} data
@@ -79,5 +79,3 @@ function parseCode(code) {
 
     return typeof code === 'number' ? code : parseInt(onlyCodeDigits, 10);
 }
-
-export { log };

@@ -56,7 +56,12 @@ describe('html()', function () {
         it('renders element with attributes', function () {
             // Given
             class MyElement extends MixElement {
+                static attributes = {
+                    name: {type: String}
+                };
+
                 name = '';
+
                 render() {
                     return html`<h1>Hello ${this.name}!</h1>`;
                 }

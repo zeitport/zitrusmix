@@ -19,9 +19,16 @@ export function renderMixElement(node) {
 
     if (ElementConstructor) {
         const element = new ElementConstructor();
-        // const attributes = node.attrs || [];
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        // const attributeMap = Object.fromEntries(attributes.map(({ name, value }) => [name, value]));
+        const attributes = node.attrs || [];
+        const attributeMap = Object.fromEntries(attributes.map(({ name, value }) => [name, value]));
+
+        for (const attributeName of Object.keys(attributeMap)) {
+            if (ElementConstructor.attributes[attributeName]) {
+                element[attributeName] = attributeMap[attributeName];
+            } else {
+                log.warn(`ZM-4643: Attribute "${attributeName}" is not declared on element "${ElementConstructor.name}".`);
+            }
+        }
 
         // #TODO: map attributes
         const elementResult = element.render();

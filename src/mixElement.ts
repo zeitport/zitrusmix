@@ -1,3 +1,4 @@
+import { AttributeDeclaration } from './attributeDeclaration.js';
 import { ElementContext } from './interfaces/elementContext.js';
 import { css } from './tags/css.js';
 import {CssTemplateResult} from './tags/cssTemplateResult.js';
@@ -10,6 +11,8 @@ export interface StylesContext {
 
 export abstract class MixElement {
     static styles: CssTemplateResult = css``;
+
+    static attributes: Record<string, AttributeDeclaration> = {};
 
     render(): HtmlTemplateResult {
         return html``;
