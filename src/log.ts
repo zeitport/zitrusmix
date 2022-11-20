@@ -48,34 +48,5 @@ export const log = {
     error: (message, data?) => {
         const entry = { msg: message, level: 'error', ...data };
         baseLogger?.error?.(entry);
-
-        if (data && data.code) {
-            process.exitCode = -parseCode(data.code);
-        }
-    },
-
-    /**
-     * @param {string} message
-     * @param {object} data
-     * @returns void
-     */
-    fatal: (message, data?) => {
-        const entry = { msg: message, level: 'fatal', ...data };
-        baseLogger?.fatal?.(entry);
-
-        if (data && data.code) {
-            process.exitCode = -parseCode(data.code);
-        }
     }
 };
-
-/**
- * @param {string} code
- * @returns {number}
- */
-function parseCode(code) {
-    const nonDigits = /[^0-9]/g;
-    const onlyCodeDigits = code.replaceAll(nonDigits, '');
-
-    return typeof code === 'number' ? code : parseInt(onlyCodeDigits, 10);
-}

@@ -11,13 +11,16 @@ import { log } from '../log.js';
  * @returns {Promise<{default: () => HtmlTemplateResult}>}
  */
 export async function loadHeadModule(options) {
-    const headModulePath = path.join(process.cwd(), options.head);
+    log.info('[Startup] Load head.js module');
+
+    const headModulePath = path.join(options.cwd, options.head);
 
     const module = await import(`file://${headModulePath}`).catch(() => null);
 
     if (!module || !module.default) {
-        const error = 'head.js module could not be loaded';
-        log.fatal(error, {code: 'ZM-1173'});
+        const error = `(ZM-1173) head.js module not found: ${headModulePath}`;
+        log.error(error);
+        throw new Error(error);
 
         // A blocking IO call during startup is okay.
         // eslint-disable-next-line node/no-sync
@@ -29,8 +32,6 @@ export async function loadHeadModule(options) {
 
         throw new Error(error);
     }
-
-    log.info('Module head.js loaded', {status: true});
 
     return module;
 }

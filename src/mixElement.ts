@@ -10,6 +10,8 @@ export interface StylesContext {
 }
 
 export abstract class MixElement {
+    static elementName = 'mix-element';
+
     static styles: CssTemplateResult = css``;
 
     static attributes: Record<string, AttributeDeclaration> = {};

@@ -12,8 +12,10 @@
     ],
     "scripts": {
         "build": "tsc --build",
+        "compile:watch": "tsc --watch",
         "test": "vitest --dir ./test/unit",
         "test:watch": "vitest watch --dir ./test/unit",
+        "integration": "npm run build && node ./test/integration/index.js",
         "lint": "eslint ./src/**/*.ts ./test/**/*.ts",
         "fix": "eslint ./src/**/*.ts ./test/**/*.ts --fix --cache",
         "tool:createErrorId": "node ./tools/createErrorId.js"

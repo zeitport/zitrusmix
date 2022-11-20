@@ -1,7 +1,7 @@
 import Fastify from 'fastify';
 
 import { definePageRoute, definePageHead, router, defineStaticRoot } from './router/router.js';
-import { Options } from './options.js';
+import { ZitrusmixOptions } from './zitrusmixOptions.js';
 import { scanPages } from './startup/scanPages.js';
 import { scanElements } from './startup/scanElements.js';
 import { loadHeadModule } from './startup/loadHeadModule.js';
@@ -11,8 +11,8 @@ import { createMixStyle } from './startup/createMixStyle.js';
 
 const fastify = Fastify();
 
-export async function zitrusmix(init: Partial<Options>): Promise<void> {
-    const options = new Options(init);
+export async function zitrusmix(init: Partial<ZitrusmixOptions>): Promise<void> {
+    const options = new ZitrusmixOptions(init);
 
     // Use custom logger
     useLogger(options.logger);
@@ -45,10 +45,11 @@ export async function zitrusmix(init: Partial<Options>): Promise<void> {
     fastify.register(router);
     fastify.listen({port: options.port}, function (error, address) {
         if (error) {
-            log.fatal(error.message);
+            log.error(error.message);
+            throw error;
+        } else {
+            log.info(new Date().toLocaleTimeString());
+            log.info(`Server is now listening on ${address}`);
         }
-
-        log.info(new Date().toLocaleTimeString());
-        log.info(`Server is now listening on ${address}`);
     });
 }
