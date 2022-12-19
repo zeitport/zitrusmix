@@ -58,4 +58,28 @@ describe('utils/ast', function() {
             assert.deepEqual(actualLinks, expectedLinks);
         });
     });
+
+    describe('traverseHighest()', function() {
+        it('returns the highest custom element', function() {
+            // Given
+            const fragement = parse5.parseFragment(`
+                <my-header>
+                    <my-image></my-image>
+                    <h1>Hello</h1>
+                </my-header>
+                <my-page>
+                    <p>Some text here...</p>
+                </my-page>
+                `
+            );
+
+            // When
+            const result = ast.traverseHighest(fragement, ast.isCustomElement);
+
+            // Then
+            const actualElements = [...result].map(node => node.tagName);
+            const expectedElements = ['my-header', 'my-page'];
+            assert.deepEqual(actualElements, expectedElements);
+        });
+    });
 });

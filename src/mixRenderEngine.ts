@@ -23,7 +23,7 @@ export class MixRenderEngine {
     }
 
     findMixElements(parent) {
-        return /** @type {ChildElement[]} */(ast.filter(parent, ast.isCustomElement));
+        return /** @type {ChildElement[]} */(ast.traverseHighest(parent, ast.isCustomElement));
     }
 
     async renderMixElements(parent) {

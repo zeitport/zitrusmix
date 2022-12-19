@@ -96,6 +96,22 @@ export function* traverse(node, selector = all, recursive = all) {
     return null;
 }
 
+export function* traverseHighest(node, selector = all) {
+    if (isElement(node) && selector(node)) {
+        yield node;
+    } else {
+        if (node.childNodes) {
+            for (const childNode of node.childNodes) {
+                if (isElement(childNode)) {
+                    yield* traverseHighest(childNode, selector);
+                }
+            }
+        }
+    }
+
+    return null;
+}
+
 /**
  * @param {Node} node
  * @param {ElementCallbackFn} selector
@@ -130,7 +146,8 @@ export const ast = {
     isCustomElement,
     traverse,
     filter,
-    find
+    find,
+    traverseHighest
 };
 
 export interface Node {
