@@ -12,8 +12,9 @@
         "LICENSE"
     ],
     "scripts": {
-        "build": "tsc --build",
-        "build:types": "tsc -p ./src/tsconfig.type.json",
+        "build": "npm run compile && npm run lint && npm run test",
+        "compile": "tsc --build",
+        "compile:types": "tsc -p ./src/tsconfig.type.json",
         "compile:watch": "tsc --watch --project ./src/tsconfig.json",
         "test": "vitest --dir ./test/unit",
         "test:watch": "vitest watch --dir ./test/unit",
