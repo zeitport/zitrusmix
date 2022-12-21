@@ -3,3 +3,8 @@
 [![CodeQL](https://github.com/zeitport/zitrusmix/workflows/CodeQL/badge.svg)](https://github.com/zeitport/zitrusmix/actions?query=workflow%3ACodeQL)
 
 # 🍋 zitrusmix
+
+A small prototype of an even smaller server side rendering framework.
+
+https://github.com/zeitport/zitrusmix
+
