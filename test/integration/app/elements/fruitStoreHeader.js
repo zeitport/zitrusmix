@@ -11,12 +11,12 @@ export class FruitStoreHeader extends MixElement {
         }
     `;
 
-    async render({html}) {
-        const {tooltip} = this;
+    async render(context) {
+        const {html} = context;
 
         return html`
             <header>
-                <h1 class="headline" title="${tooltip}"><slot></slot></h1>
+                <h1 class="headline" title="${this.tooltip}"><slot></slot></h1>
             </header>
         `;
     }

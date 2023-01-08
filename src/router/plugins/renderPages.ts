@@ -25,7 +25,7 @@ export async function renderPages(fastify: FastifyInstance, options: RenderPages
                 const document = parse5.parse(fileContent);
 
                 timeline.mark('merge-head');
-                mergeHead(document, options.head().fragment);
+                mergeHead(document, (await options.head()).fragment);
 
                 timeline.mark('render');
 
@@ -42,6 +42,8 @@ export async function renderPages(fastify: FastifyInstance, options: RenderPages
             } catch (error) {
                 const message = getErrorMessage(error);
                 log.error(`Render page "${request.url}" failed: ${message}`);
+                // @ts-ignore
+                log.error(error?.stack);
                 reply.status(500).send();
             }
         };
