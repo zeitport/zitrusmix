@@ -33,9 +33,7 @@ export async function renderPages(fastify: FastifyInstance, options: RenderPages
                     page: new MixPage({params: request.params})
                 });
                 const renderEngine = new MixRenderEngine(renderContext);
-                const {html} = renderContext;
-
-                const renderedPage = await renderEngine.render(html`${parse5.serialize(document)}`);
+                const renderedPage = await renderEngine.renderHtmlDocument(document);
 
                 reply.header('Server-Timing', timeline.getPerformanceServerTiming());
                 reply.type('text/html').send(renderedPage);

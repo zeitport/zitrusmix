@@ -1,4 +1,5 @@
 import * as parse5 from 'parse5';
+import {Document} from 'parse5/dist/tree-adapters/default.js';
 import {log} from './log.js';
 import {RenderTask} from './renderTask.js';
 import {elements} from './state/elements.js';
@@ -20,6 +21,13 @@ export class MixRenderEngine {
         await this.processNextRenderTask();
 
         return parse5.serialize(templateResult.fragment);
+    }
+
+    async renderHtmlDocument(document: Document): Promise<string> {
+        await this.renderMixElements(document);
+        await this.processNextRenderTask();
+
+        return parse5.serialize(document);
     }
 
     findMixElements(parent) {
