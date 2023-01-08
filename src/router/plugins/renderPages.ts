@@ -2,7 +2,7 @@ import {FastifyInstance} from 'fastify/types/instance.js';
 import fs from 'node:fs/promises';
 import * as parse5 from 'parse5';
 import {MixPage} from '../../mixPage.js';
-import {MixRenderEngine} from "../../mixRenderEngine.js";
+import {MixRenderEngine} from '../../mixRenderEngine.js';
 import { MixRenderContext } from '../../tags/mixRenderContext.js';
 import { Timeline } from '../utils/timeline.js';
 import { mergeHead } from '../utils/mergeHead.js';
