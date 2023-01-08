@@ -10,7 +10,7 @@
         "allowJs": false,
         "noImplicitAny": false,
         "checkJs": false,
-        "declaration": false,
+        "declaration": true,
         "emitDeclarationOnly": false,
         "noEmit": false,
         "outDir": "../dist/",
