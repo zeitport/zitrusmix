@@ -62,7 +62,7 @@
         "nodemon": "^2.0.20",
         "ts-node": "^10.9.1",
         "typescript": "latest",
-        "vitest": "^0.26.3",
+        "vitest": "^0.27.0",
         "zitrusmix": "file:."
     }
 }
